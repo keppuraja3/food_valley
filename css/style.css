@@ -1,14 +1,14 @@
 @font-face {
   font-family: "AveriaSerifLibre";
-  src: url(/fonts/Averia_Serif_Libre/AveriaSerifLibre-Bold.ttf);
+  src: url(./fonts/Averia_Serif_Libre/AveriaSerifLibre-Bold.ttf);
 }
 @font-face {
   font-family: "RubikDoodleShadow";
-  src: url(/fonts/Rubik_Doodle_Shadow/RubikDoodleShadow-Regular.ttf);
+  src: url(./fonts/Rubik_Doodle_Shadow/RubikDoodleShadow-Regular.ttf);
 }
 @font-face {
   font-family: "Popins";
-  src: url(/fonts/Poppins/Poppins-Black.ttf);
+  src: url(./fonts/Poppins/Poppins-Black.ttf);
 }
 
 :root {
