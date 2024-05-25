@@ -1,15 +1,21 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
+  // Navigation variable--
+  const navigate = useNavigate();
+
   // Register user info variable
 
   const [regUserInput, setRegUserInput] = useState({
     username: "",
     mobileNo: "",
     email: "",
-    password1: "",
+    role: "user",
+    password: "",
     password2: "",
   });
 
@@ -18,8 +24,10 @@ function Register() {
   const [userNameError, setUserNameError] = useState("");
   const [mobileNoError, setMobileNoError] = useState("");
   const [emailError, setEmailError] = useState("");
-  const [password1Error, setPassword1Error] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [password2Error, setPassword2Error] = useState("");
+
+  const [backendResponse, setBackendResponse] = useState("");
 
   // Register user input add variable
 
@@ -42,62 +50,76 @@ function Register() {
     if (!regUserInput.username == "") {
       if (regUserInput.username.length >= 3) {
         setUserNameError("");
+
+        // Mobile No validation
+        if (!regUserInput.mobileNo == "") {
+          if (regUserInput.mobileNo.length == 10) {
+            setMobileNoError("");
+
+            // Email validation
+            if (!regUserInput.email == "") {
+              const isEmailValid = regUserInput.email.match(emailPattern);
+              if (isEmailValid) {
+                setEmailError("");
+
+                // Password validation
+                if (!regUserInput.password == "") {
+                  const isPasswordValid =
+                    regUserInput.password.match(passwordPattern);
+                  if (isPasswordValid) {
+                    setPasswordError("");
+
+                    // Password2 validation
+                    if (!regUserInput.password2 == "") {
+                      if (regUserInput.password == regUserInput.password2) {
+                        setPassword2Error("");
+
+                        // Add new user to the backend
+                        axios
+                          .post(
+                            "http://localhost:9000/user/register",
+                            regUserInput
+                          )
+                          .then((response) => {
+                            navigate("/login");
+                            console.log(response.data);
+                            setBackendResponse("");
+                          })
+                          .catch((err) => {
+                            console.log(err.response.data.error);
+                            setBackendResponse(err.response.data.error);
+                          });
+                      } else {
+                        setPassword2Error("Password does not match");
+                      }
+                    } else {
+                      setPassword2Error("Please enter comfirm password");
+                    }
+                  } else {
+                    setPasswordError(
+                      "Password must have 8 digit and one capital, one small letter, one number, one symbol"
+                    );
+                  }
+                } else {
+                  setPasswordError("Please enter password");
+                }
+              } else {
+                setEmailError("Enter Valid email address");
+              }
+            } else {
+              setEmailError("Please enter email");
+            }
+          } else {
+            setMobileNoError("Mobile No only in 10 digits");
+          }
+        } else {
+          setMobileNoError("Please enter mobile no");
+        }
       } else {
         setUserNameError("Username minimum have 3 characters");
       }
     } else {
       setUserNameError("Please enter username");
-    }
-
-    // Mobile No validation
-
-    if (!regUserInput.mobileNo == "") {
-      if (regUserInput.mobileNo.length == 10) {
-        setMobileNoError("");
-      } else {
-        setMobileNoError("Mobile No only in 10 digits");
-      }
-    } else {
-      setMobileNoError("Please enter mobile no");
-    }
-
-    // Email validation
-    if (!regUserInput.email == "") {
-      const isEmailValid = regUserInput.email.match(emailPattern);
-      if (isEmailValid) {
-        setEmailError("");
-      } else {
-        setEmailError("Enter Valid email address");
-      }
-    } else {
-      setEmailError("Please enter email");
-    }
-
-    // Password1 validation
-
-    if (!regUserInput.password1 == "") {
-      const isPasswordValid = regUserInput.password1.match(passwordPattern);
-      if (isPasswordValid) {
-        setPassword1Error("");
-      } else {
-        setPassword1Error(
-          "Password must have 8 digit and one capital, one small letter, one number, one symbol"
-        );
-      }
-    } else {
-      setPassword1Error("Please enter password");
-    }
-
-    // Password2 validation
-
-    if (!regUserInput.password2 == "") {
-      if (regUserInput.password1 == regUserInput.password2) {
-        setPassword2Error("");
-      } else {
-        setPassword2Error("Password does not match");
-      }
-    } else {
-      setPassword2Error("Please enter comfirm password");
     }
   };
 
@@ -115,7 +137,9 @@ function Register() {
             className="col-12 col-lg-4 col-sm-6  row bg-secondary border border-3 border-dark p-3 text-center d-grid gap-3"
           >
             <h1>Create Account</h1>
-
+            <div className=" text-danger text-start fw-bolder mt-1 mb-1">
+              {backendResponse}
+            </div>
             <div className="col-12">
               <input
                 className="form-control"
@@ -161,14 +185,14 @@ function Register() {
             <div className="col-12 ">
               <input
                 className="form-control"
-                name="password1"
-                value={regUserInput.password1}
+                name="password"
+                value={regUserInput.password}
                 onChange={addRegUserInput}
                 type="password"
                 placeholder="Enter Password"
               />
               <div className=" text-danger text-start fw-bolder mt-1 mb-1">
-                {password1Error}
+                {passwordError}
               </div>
             </div>
 

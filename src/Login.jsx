@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
+import axios from "axios";
 
 function Login() {
   // Form Input Value variabels
@@ -13,9 +14,7 @@ function Login() {
   const [userEmailError, setUserEmailError] = useState("");
   const [userPasswordError, setUserPasswordError] = useState("");
 
-  // Form input Valid variables
-  const [userEmailValid, setUserEmailValid] = useState(false);
-  const [userPasswordValid, setUserPasswordValid] = useState(false);
+  const [backendResponse, setBackendResponse] = useState("");
 
   // Form inputed data add function
   const addUserData = (e) => {
@@ -47,7 +46,7 @@ function Login() {
   const emailPattern = /^[^\.\s][\w\-]+(\.[\w\-]+)*@([\w-]+\.)+[\w-]{2,}$/;
 
   // Form validation checking and login
-  const handleSumbit = (event) => {
+  const handleSumbit = async (event) => {
     event.preventDefault();
     // console.log("Demo test");
 
@@ -58,32 +57,39 @@ function Login() {
         .trim()
         .match(emailPattern);
       if (isEmailValid) {
-        setUserEmailValid(true);
         setUserEmailError("");
+
+        // Password validation condition
+
+        if (!loginUserInput.userPassword == "") {
+          const isPasswordValid = passwordPattern.test(
+            loginUserInput.userPassword
+          );
+          if (isPasswordValid) {
+            setUserPasswordError("");
+
+            await axios
+              .post("http://localhost:9000/user/login")
+              .then((res) => {
+                console.log(res);
+              })
+              .catch((err) => {
+                console.log(err.response.data.error);
+                setBackendResponse(err.response.data.error);
+              });
+          } else {
+            setUserPasswordError(
+              "Password must have 8 digit and one capital, one small letter, one number, one symbol"
+            );
+          }
+        } else {
+          setUserPasswordError("Please enter password");
+        }
       } else {
         setUserEmailError("Enter valid email");
       }
     } else {
       setUserEmailError("Please enter email");
-    }
-
-    // Password validation condition
-
-    if (!loginUserInput.userPassword == "") {
-      const isPasswordValid = loginUserInput.userPassword
-        .toLowerCase()
-        .trim()
-        .match(passwordPattern);
-      if (isPasswordValid) {
-        setUserPasswordValid(true);
-        setUserPasswordError("");
-      } else {
-        setUserPasswordError(
-          "Password must have 8 digit and one capital, one small letter, one number, one symbol"
-        );
-      }
-    } else {
-      setUserPasswordError("Please enter password");
     }
   };
   return (
@@ -100,7 +106,9 @@ function Login() {
             className="col-12 col-sm-8 col-md-6 col-lg-4 row bg-secondary border border-3 border-dark p-3 text-center d-grid gap-3"
           >
             <h1>Login</h1>
-
+            <p className=" text-danger text-start fw-bolder my-1 ">
+              {backendResponse}
+            </p>
             <div className="col-12 ">
               <input
                 className="form-control"

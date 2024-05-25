@@ -1,0 +1,35 @@
+*{
+    scroll-behavior: smooth;
+    transition: all .4s;
+}
+
+.sidebar-container{
+    min-height: 80vh;
+    box-shadow: 0 0 3px #fffbfb;
+    background: #00000088;
+    backdrop-filter: blur(5px);
+    border-radius: 1rem;
+}
+
+.sidebar-container ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-container li{
+    margin: .2rem;
+    height: max-content;
+    border-radius: .5rem;
+}
+.sidebar-container li a:hover,.active-link{
+    background: #fffefe57;
+}
+.sidebar-container li a{
+    color: #fff;
+    padding: .5rem;
+    display: block;
+    width: 100%;
+    font-weight: bolder;
+    border-radius: .5rem;
+}

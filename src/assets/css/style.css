@@ -1,7 +1,3 @@
-/* @font-face {
-  font-family: "AveriaSerifLibre";
-  src: url(/fonts/Averia_Serif_Libre/AveriaSerifLibre-Bold.ttf);
-} */
 @font-face {
   font-family: "RubikDoodleShadow";
   src: url(/fonts/Rubik_Doodle_Shadow/RubikDoodleShadow-Regular.ttf);
@@ -67,6 +63,7 @@ input::-webkit-inner-spin-button {
 
 .nav-container {
   box-shadow: 0 0 3px #fffbfb;
+  background: #00000088;
   backdrop-filter: blur(5px);
   border-radius: 1rem;
 }
@@ -103,10 +100,10 @@ input::-webkit-inner-spin-button {
   font-family: "Popins";
 }
 
-#home-section .row p,
+/* #home-section .row p,
 .card-subtitle {
-  font-family: "AveriaSerifLibre";
-}
+  font-family: "Popins";
+} */
 
 #home-image img {
   /* margin-top: 4.5rem; */
@@ -205,11 +202,12 @@ input::-webkit-inner-spin-button {
   width: 95%;
 }
 .menu-search{
-  width: max-content;
+  max-width: max-content;
 }
 
 .menu-search input{
  border: none;
+ width: 80%;
  outline: none;
 }
 .menu-search img{

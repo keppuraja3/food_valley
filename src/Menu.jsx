@@ -1,14 +1,22 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
+import toast, { Toaster } from "react-hot-toast";
 
 function Menu() {
+  // Toast
+  const notifySuccess = (msg) => toast.success(msg);
+
   const [foodMenu, setFoodMenu] = useState([
     {
       id: 1,
       name: "chiken",
       description: "let's make something good is food",
       price: 230,
+      rateing: 4.4,
+      deliveryTime: 20,
+      offer: 30,
+      hotelName: "Vamsavali",
       image: "/img/menu/chicken.png",
       type: "veg",
     },
@@ -17,6 +25,10 @@ function Menu() {
       name: "biriyani",
       description: "let's make something good is food",
       price: 230,
+      rateing: 4.4,
+      deliveryTime: 20,
+      offer: 30,
+      hotelName: "Vamsavali",
       image: "/img/menu/chicken.png",
       type: "veg",
     },
@@ -25,6 +37,10 @@ function Menu() {
       name: "noodels",
       description: "let's make something good is food",
       price: 230,
+      rateing: 4.4,
+      deliveryTime: 20,
+      offer: 30,
+      hotelName: "Vamsavali",
       image: "/img/menu/chicken.png",
       type: "veg",
     },
@@ -33,6 +49,10 @@ function Menu() {
       name: "sambar",
       description: "let's make something good is food",
       price: 230,
+      rateing: 4.4,
+      deliveryTime: 20,
+      offer: 30,
+      hotelName: "Vamsavali",
       image: "/img/menu/chicken.png",
       type: "veg",
     },
@@ -41,6 +61,10 @@ function Menu() {
       name: "mutton",
       description: "let's make something good is food",
       price: 230,
+      rateing: 4.4,
+      deliveryTime: 20,
+      offer: 30,
+      hotelName: "Vamsavali",
       image: "/img/menu/chicken.png",
       type: "veg",
     },
@@ -49,6 +73,10 @@ function Menu() {
       name: "panneer",
       description: "let's make something good is food",
       price: 230,
+      rateing: 4.4,
+      deliveryTime: 20,
+      offer: 30,
+      hotelName: "Vamsavali",
       image: "/img/menu/chicken.png",
       type: "veg",
     },
@@ -57,6 +85,10 @@ function Menu() {
       name: "veg mix",
       description: "let's make something good is food",
       price: 230,
+      rateing: 4.4,
+      deliveryTime: 20,
+      offer: 30,
+      hotelName: "Vamsavali",
       image: "/img/menu/chicken.png",
       type: "veg",
     },
@@ -65,6 +97,10 @@ function Menu() {
       name: "veg salad",
       description: "let's make something good is food",
       price: 230,
+      rateing: 4.4,
+      deliveryTime: 20,
+      offer: 30,
+      hotelName: "Vamsavali",
       image: "/img/menu/chicken.png",
       type: "veg",
     },
@@ -73,6 +109,10 @@ function Menu() {
       name: "meal",
       description: "let's make something good is food",
       price: 230,
+      rateing: 4.4,
+      deliveryTime: 20,
+      offer: 30,
+      hotelName: "Vamsavali",
       image: "/img/menu/chicken.png",
       type: "veg",
     },
@@ -81,16 +121,26 @@ function Menu() {
       name: "veg meal",
       description: "let's make something good is food",
       price: 230,
+      rateing: 4.4,
+      deliveryTime: 20,
+      offer: 30,
+      hotelName: "Vamsavali",
       image: "/img/menu/chicken.png",
       type: "veg",
     },
   ]);
+
   const [filteredMenu, setFilterdMenu] = useState([
     {
       id: 1,
       name: "chiken",
       description: "let's make something good is food",
       price: 630,
+      rateing: 4.4,
+      deliveryTime: 20,
+      offer: 30,
+      hotelName: "Vamsavali",
+
       image: "/img/menu/chicken.png",
       type: "nonVeg",
     },
@@ -99,6 +149,10 @@ function Menu() {
       name: "biriyani",
       description: "let's make something good is food",
       price: 230,
+      rateing: 4.4,
+      deliveryTime: 20,
+      offer: 30,
+      hotelName: "Vamsavali",
       image: "/img/menu/chicken.png",
       type: "nonVeg",
     },
@@ -107,6 +161,10 @@ function Menu() {
       name: "noodels",
       description: "let's make something good is food",
       price: 230,
+      rateing: 4.4,
+      deliveryTime: 20,
+      offer: 30,
+      hotelName: "Vamsavali",
       image: "/img/menu/chicken.png",
       type: "veg",
     },
@@ -115,6 +173,10 @@ function Menu() {
       name: "sambar",
       description: "let's make something good is food",
       price: 230,
+      rateing: 4.4,
+      deliveryTime: 20,
+      offer: 30,
+      hotelName: "Vamsavali",
       image: "/img/menu/chicken.png",
       type: "veg",
     },
@@ -123,6 +185,10 @@ function Menu() {
       name: "mutton",
       description: "let's make something good is food",
       price: 230,
+      rateing: 4.4,
+      deliveryTime: 20,
+      offer: 30,
+      hotelName: "Vamsavali",
       image: "/img/menu/chicken.png",
       type: "nonVeg",
     },
@@ -131,6 +197,10 @@ function Menu() {
       name: "panneer",
       description: "let's make something good is food",
       price: 230,
+      rateing: 4.4,
+      deliveryTime: 20,
+      offer: 30,
+      hotelName: "Vamsavali",
       image: "/img/menu/chicken.png",
       type: "veg",
     },
@@ -139,6 +209,10 @@ function Menu() {
       name: "veg mix",
       description: "let's make something good is food",
       price: 230,
+      rateing: 4.4,
+      deliveryTime: 20,
+      offer: 30,
+      hotelName: "Vamsavali",
       image: "/img/menu/chicken.png",
       type: "veg",
     },
@@ -147,6 +221,10 @@ function Menu() {
       name: "veg salad",
       description: "let's make something good is food",
       price: 230,
+      rateing: 4.4,
+      deliveryTime: 20,
+      offer: 30,
+      hotelName: "Vamsavali",
       image: "/img/menu/chicken.png",
       type: "veg",
     },
@@ -155,6 +233,10 @@ function Menu() {
       name: "meal",
       description: "let's make something good is food",
       price: 230,
+      rateing: 4.4,
+      deliveryTime: 20,
+      offer: 30,
+      hotelName: "Vamsavali",
       image: "/img/menu/chicken.png",
       type: "veg",
     },
@@ -163,6 +245,10 @@ function Menu() {
       name: "veg meal",
       description: "let's make something good is food",
       price: 230,
+      rateing: 4.4,
+      deliveryTime: 20,
+      offer: 30,
+      hotelName: "Vamsavali",
       image: "/img/menu/chicken.png",
       type: "veg",
     },
@@ -179,9 +265,18 @@ function Menu() {
     setFilterdMenu(filter);
   };
 
+  // add to cart function
+  const [cartItem, setCartItem] = useState([]);
+
+  const addCart = (food) => {
+    setCartItem([...cartItem, food]);
+    notifySuccess(`Add to cart successfully`);
+  };
+
   return (
     <>
       {/* <!-- Menu Section start --> */}
+      <Toaster position="top-right" reverseOrder={false} />
       <section id="menu-section" className="container pt-5 pb-5">
         <div className="text-center">
           <h1>Let's make your choice</h1>
@@ -190,27 +285,35 @@ function Menu() {
         <div className="row p-5 p-lg-0 pt-0 justify-content-center ">
           <div className="text-center">
             <div
-              className="mt-5 d-flex justify-content-end   "
+              className="mt-5 d-flex justify-content-between  "
               id="non-veg-menu"
             >
-              <div className=" bg-light rounded-2 menu-search p-2 ">
+              {/* menu search continer  */}
+              <div className=" bg-light rounded-2 menu-search mx-lg-auto d-flex justify-content-between align-items-center  p-2 ">
                 <input
                   type="text"
                   placeholder="Find your fav food..."
                   onChange={searchMenu}
                 />
-                <img src="/img/search.png" alt="search" width={20} />
+                <img
+                  src="/img/search.png"
+                  alt="search"
+                  width={20}
+                  height={20}
+                />
               </div>
               <div
                 className=" p-2 badge bg-success mx-1 d-flex align-items-center justify-content-evenly "
-                title="Order"
+                title="View Cart"
+                style={{ cursor: "pointer" }}
               >
                 <img
                   src="/img/shopping-cart-light.png"
                   alt="search"
                   width={20}
                 />
-                &nbsp; <span className=" fs-6 fw-bolder">0</span>
+                &nbsp;{" "}
+                <span className=" fs-6 fw-bolder">{cartItem.length}</span>
               </div>
             </div>
 
@@ -247,7 +350,7 @@ function Menu() {
                       &#8377; {food.price}
                     </div>
                     <button
-                      onClick={() => addCart(food.id)}
+                      onClick={() => addCart(food)}
                       className="btn btn-success  col-8  text-light text-capitalize p-2 bg-gradient"
                     >
                       Add Cart
@@ -600,14 +703,6 @@ function Menu() {
                 </div>
               </div>
             </div>
-          </div>
-
-          {/*---------------- veg menu start ---------------- */}
-          <div className="text-center">
-            <h3 className="mt-5" id="veg-menu">
-              Veg Menu
-            </h3>
-            <hr />
           </div>
 
           <div className="col-12 col-sm-6 col-md-4 col-lg-3 p-3 text-center">
