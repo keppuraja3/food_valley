@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { Col, Container, Row } from "react-bootstrap";
@@ -46,7 +46,7 @@ function Admin() {
         >
           <Container className="p-0">
             <Nav className="me-auto sidebar-container overflow-hidden">
-              <ul className=" bg-dark w-100" style={{ height: "80vh" }}>
+              <ul className=" bg-dark w-100 p-3" style={{ height: "80vh" }}>
                 <li>
                   <Link
                     className={`${
@@ -79,21 +79,9 @@ function Admin() {
                         : ""
                     } `}
                     onClick={handleSideBarClose}
-                    to="management"
+                    to="order"
                   >
-                    Management
-                  </Link>
-                </li>
-
-                <li>
-                  <Link
-                    className={`${
-                      location.pathname == "/admin/sales" ? "active-link" : ""
-                    } `}
-                    onClick={handleSideBarClose}
-                    to="sales"
-                  >
-                    Sales
+                    Order
                   </Link>
                 </li>
 
@@ -112,23 +100,7 @@ function Admin() {
                 <li>
                   <Link
                     className={`${
-                      location.pathname == "/admin/settings"
-                        ? "active-link"
-                        : ""
-                    } `}
-                    onClick={handleSideBarClose}
-                    to="settings"
-                  >
-                    Settings
-                  </Link>
-                </li>
-
-                <li>
-                  <Link
-                    className={`${
-                      location.pathname == "/admin/mprofileenu"
-                        ? "active-link"
-                        : ""
+                      location.pathname == "/admin/profile" ? "active-link" : ""
                     } `}
                     onClick={handleSideBarClose}
                     to="profile"
@@ -136,7 +108,7 @@ function Admin() {
                     Profile
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link
                     className={`${
                       location.pathname == "/admin/report" ? "active-link" : ""
@@ -146,7 +118,7 @@ function Admin() {
                   >
                     Report
                   </Link>
-                </li>
+                </li> */}
               </ul>
             </Nav>
           </Container>
@@ -195,13 +167,13 @@ function Admin() {
                         ? "active-link"
                         : ""
                     } `}
-                    to="management"
+                    to="order"
                   >
-                    Management
+                    Order
                   </Link>
                 </li>
 
-                <li>
+                {/* <li>
                   <Link
                     className={`${
                       location.pathname == "/admin/sales" ? "active-link" : ""
@@ -210,7 +182,7 @@ function Admin() {
                   >
                     Sales
                   </Link>
-                </li>
+                </li> */}
 
                 <li>
                   <Link
@@ -223,7 +195,7 @@ function Admin() {
                   </Link>
                 </li>
 
-                <li>
+                {/* <li>
                   <Link
                     className={`${
                       location.pathname == "/admin/settings"
@@ -234,21 +206,19 @@ function Admin() {
                   >
                     Settings
                   </Link>
-                </li>
+                </li> */}
 
                 <li>
                   <Link
                     className={`${
-                      location.pathname == "/admin/mprofileenu"
-                        ? "active-link"
-                        : ""
+                      location.pathname == "/admin/profile" ? "active-link" : ""
                     } `}
                     to="profile"
                   >
                     Profile
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link
                     className={`${
                       location.pathname == "/admin/report" ? "active-link" : ""
@@ -257,7 +227,7 @@ function Admin() {
                   >
                     Report
                   </Link>
-                </li>
+                </li> */}
               </ul>
             </div>
           </Col>

@@ -57,6 +57,301 @@ function Home() {
       </section>
       {/* <!-- Home-banner Section End --> */}
 
+      {/* <!-- Top Menu Section Start --> */}
+      <section id="chefs-section" className="container pt-5 pb-5">
+        <div className="text-center">
+          <h1>Top Menus</h1>
+        </div>
+        <div className=" container-fluid">
+          <div className="row g-4 mb-4 p-3 ">
+            <div className="col-12 col-sm-6 col-md-4 col-lg-3 p-3 text-center">
+              <div className="card menu-card h-100 bg-light overflow-hidden bg-opacity-25 position-relative ">
+                <div className="badge bg-primary top-0 start-0 rounded-0 position-absolute ">
+                  25% off
+                </div>
+                {/* <img
+                  className="position-absolute top-0 end-0 m-2 "
+                  id="like-heart"
+                  height="30"
+                  width="30"
+                  src="./img/heart.svg"
+                  alt="like heart"
+                  title="Add to Like"
+                /> */}
+                <Link to="order">
+                  <div className="card-header  ">
+                    <img
+                      className="card-img"
+                      src="./img/menu/biriyani.png"
+                      alt="biriyani"
+                    />
+                  </div>
+                </Link>
+                <div className="card-footer d-flex flex-column justify-content-around h-100  ">
+                  <div className="card-text  mb-3 text-light text-capitalize">
+                    biriyani
+                  </div>
+                  <div className=" text-capitalize text-center mb-3 text-light  ">
+                    Let's take a taste for good
+                  </div>
+                  <div className="d-flex justify-content-around  align-items-center row">
+                    <div className="badge col-3 text-light  text-center text-capitalize p-2 btn bg-gradient bg-danger   ">
+                      &#8377; 280
+                    </div>
+                    <Link
+                      to="order"
+                      className="btn btn-success  col-8  text-light text-capitalize p-2 bg-gradient"
+                    >
+                      Add Cart
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-12 col-sm-6 col-md-4 col-lg-3 p-3 text-center">
+              <div className="card menu-card h-100 bg-light overflow-hidden bg-opacity-25 position-relative ">
+                <Link to="order">
+                  <div className="card-header  ">
+                    <img
+                      className="card-img"
+                      src="./img/menu/chilli_chicken.png"
+                      alt="chilli chicken"
+                    />
+                  </div>
+                </Link>
+                <div className="card-footer d-flex flex-column justify-content-around h-100 ">
+                  <div className="card-text  mb-3 text-light text-capitalize">
+                    chilli chicken
+                  </div>
+                  <div className=" text-capitalize text-center mb-3 text-light  ">
+                    Let's take a taste for good
+                  </div>
+                  <div className="d-flex justify-content-around  align-items-center row">
+                    <div className="badge col-3 text-light  text-center text-capitalize p-2 btn bg-gradient bg-danger   ">
+                      &#8377; 310
+                    </div>
+                    <Link
+                      to="order"
+                      className="btn btn-success  col-8  text-light text-capitalize p-2 bg-gradient"
+                    >
+                      Add Cart
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-12 col-sm-6 col-md-4 col-lg-3 p-3 text-center">
+              <div className="card menu-card h-100 bg-light overflow-hidden bg-opacity-25 position-relative ">
+                <Link to="order">
+                  <div className="card-header  ">
+                    <img
+                      className="card-img"
+                      src="./img/menu/mutton-fry.png"
+                      alt="mutton fry"
+                    />
+                  </div>
+                </Link>
+                <div className="card-footer d-flex flex-column justify-content-around h-100  ">
+                  <div className="card-text  mb-3 text-light text-capitalize">
+                    mutton fry
+                  </div>
+                  <div className=" text-capitalize text-center mb-3 text-light  ">
+                    Let's take a taste for good
+                  </div>
+                  <div className="d-flex justify-content-around  align-items-center row">
+                    <div className="badge col-3 text-light  text-center text-capitalize p-2 btn bg-gradient bg-danger   ">
+                      &#8377; 280
+                    </div>
+                    <Link
+                      to="order"
+                      className="btn btn-success  col-8  text-light text-capitalize p-2 bg-gradient"
+                    >
+                      Add Cart
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-12 col-sm-6 col-md-4 col-lg-3 p-3 text-center">
+              <div className="card menu-card h-100 bg-light overflow-hidden bg-opacity-25 position-relative h-100 ">
+                <div className="badge bg-primary top-0 start-0 rounded-0 position-absolute ">
+                  20% off
+                </div>
+
+                <Link to="order">
+                  <div className="card-header  ">
+                    <img
+                      className="card-img"
+                      src="./img/menu/gril_chiken_set.png"
+                      alt="gril chiken set"
+                    />
+                  </div>
+                </Link>
+                <div className="card-footer d-flex flex-column justify-content-around h-100  ">
+                  <div className="card-text  mb-3 text-light text-capitalize">
+                    gril chiken set
+                  </div>
+                  <div className=" text-capitalize text-center mb-3 text-light  ">
+                    Let's take a taste for good
+                  </div>
+                  <div className="d-flex justify-content-around  align-items-center row">
+                    <div className="badge col-3 text-light  text-center text-capitalize p-2 btn bg-gradient bg-danger   ">
+                      &#8377; 300
+                    </div>
+                    <Link
+                      to="order"
+                      className="btn btn-success  col-8  text-light text-capitalize p-2 bg-gradient"
+                    >
+                      Add Cart
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-12 col-sm-6 col-md-4 col-lg-3 p-3 text-center">
+              <div className="card menu-card h-100 bg-light overflow-hidden bg-opacity-25 position-relative ">
+                <Link to="order">
+                  <div className="card-header  ">
+                    <img
+                      className="card-img mt-3 mb-3 "
+                      src="./img/menu/parotta non veg set.png"
+                      alt="parotta non veg set"
+                    />
+                  </div>
+                </Link>
+                <div className="card-footer d-flex flex-column justify-content-around h-100  ">
+                  <div className="card-text  mb-3 text-light text-capitalize">
+                    parotta non veg set
+                  </div>
+                  <div className=" text-capitalize text-center mb-3 text-light  ">
+                    Let's take a taste for good
+                  </div>
+                  <div className="d-flex justify-content-around  align-items-center row">
+                    <div className="badge col-3 text-light  text-center text-capitalize p-2 btn bg-gradient bg-danger   ">
+                      &#8377; 280
+                    </div>
+                    <Link
+                      to="order"
+                      className="btn btn-success  col-8  text-light text-capitalize p-2 bg-gradient"
+                    >
+                      Add Cart
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-12 col-sm-6 col-md-4 col-lg-3 p-3 text-center">
+              <div className="card menu-card h-100 bg-light overflow-hidden bg-opacity-25 position-relative ">
+                <div className="badge bg-primary top-0 start-0 rounded-0 position-absolute ">
+                  5% off
+                </div>
+
+                <Link to="order">
+                  <div className="card-header  ">
+                    <img
+                      className="card-img mt-5 mb-4 "
+                      src="./img/menu/aattu kal kulambu.png"
+                      alt="aattu kal kulambu"
+                    />
+                  </div>
+                </Link>
+                <div className="card-footer d-flex flex-column justify-content-around h-100 ">
+                  <div className="card-text  mb-3 text-light text-capitalize">
+                    aattu kal kulambu
+                  </div>
+                  <div className=" text-capitalize text-center mb-3 text-light  ">
+                    Let's take a taste for good
+                  </div>
+                  <div className="d-flex justify-content-around  align-items-center row">
+                    <div className="badge col-3 text-light  text-center text-capitalize p-2 btn bg-gradient bg-danger   ">
+                      &#8377; 310
+                    </div>
+                    <Link
+                      to="order"
+                      className="btn btn-success  col-8  text-light text-capitalize p-2 bg-gradient"
+                    >
+                      Add Cart
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-12 col-sm-6 col-md-4 col-lg-3 p-3 text-center">
+              <div className="card menu-card h-100 bg-light overflow-hidden bg-opacity-25 position-relative ">
+                <Link to="order">
+                  <div className="card-header  ">
+                    <img
+                      className="card-img"
+                      src="./img/menu/biriyani.png"
+                      alt="Briyani"
+                    />
+                  </div>
+                </Link>
+                <div className="card-footer d-flex flex-column justify-content-around h-100  ">
+                  <div className="card-text  mb-3 text-light text-capitalize">
+                    Briyani
+                  </div>
+                  <div className=" text-capitalize text-center mb-3 text-light  ">
+                    Let's take a taste for good
+                  </div>
+                  <div className="d-flex justify-content-around  align-items-center row">
+                    <div className="badge col-3 text-light  text-center text-capitalize p-2 btn bg-gradient bg-danger   ">
+                      &#8377; 280
+                    </div>
+                    <Link
+                      to="order"
+                      className="btn btn-success  col-8  text-light text-capitalize p-2 bg-gradient"
+                    >
+                      Add Cart
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-12 col-sm-6 col-md-4 col-lg-3 p-3 text-center">
+              <div className="card menu-card h-100 bg-light overflow-hidden bg-opacity-25 position-relative ">
+                <Link to="order">
+                  <div className="card-header  ">
+                    <img
+                      className="card-img"
+                      src="./img/menu/chicken.png"
+                      alt="chicken"
+                    />
+                  </div>
+                </Link>
+                <div className="card-footer d-flex flex-column justify-content-around h-100  ">
+                  <div className="card-text  mb-3 text-light text-capitalize">
+                    chicken
+                  </div>
+                  <div className=" text-capitalize text-center mb-3 text-light  ">
+                    Let's take a taste for good
+                  </div>
+                  <div className="d-flex justify-content-around  align-items-center row">
+                    <div className="badge col-3 text-light  text-center text-capitalize p-2 btn bg-gradient bg-danger   ">
+                      &#8377; 300
+                    </div>
+                    <Link
+                      to="order"
+                      className="btn btn-success  col-8  text-light text-capitalize p-2 bg-gradient"
+                    >
+                      Add Cart
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* <!-- Top Menu Section End --> */}
+
       {/* <!-- Chefs Section Start --> */}
       <section id="chefs-section" className="container pt-5 pb-5">
         <div className="text-center">

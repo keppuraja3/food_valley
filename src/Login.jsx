@@ -2,19 +2,30 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import axios from "axios";
+import Cookies from "universal-cookie";
+import { useJwt } from "react-jwt";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
+
+  const [token, setToken] = useState("");
+  const { decodedToken, isExpired } = useJwt(token);
+
+  // Initialize cookies
+  const cookies = new Cookies();
+
   // Form Input Value variabels
   const [loginUserInput, setLoginUserInput] = useState({
-    userEmail: "",
-    userPassword: "",
+    mobileNo: "",
+    password: "",
   });
 
   // Form Input Error variables
-  const [userEmailError, setUserEmailError] = useState("");
-  const [userPasswordError, setUserPasswordError] = useState("");
+  const [mobileNoError, setMobileNoError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
-  const [backendResponse, setBackendResponse] = useState("");
+  const [backendResponse, setBackendResponse] = useState(null);
 
   // Form inputed data add function
   const addUserData = (e) => {
@@ -51,45 +62,44 @@ function Login() {
     // console.log("Demo test");
 
     // Email validation condition
-    if (!loginUserInput.userEmail == "") {
-      const isEmailValid = loginUserInput.userEmail
-        .toLowerCase()
-        .trim()
-        .match(emailPattern);
-      if (isEmailValid) {
-        setUserEmailError("");
+    if (!loginUserInput.mobileNo == "") {
+      if (loginUserInput.mobileNo.length == 10) {
+        setMobileNoError("");
 
         // Password validation condition
 
-        if (!loginUserInput.userPassword == "") {
-          const isPasswordValid = passwordPattern.test(
-            loginUserInput.userPassword
-          );
+        if (!loginUserInput.password == "") {
+          const isPasswordValid = passwordPattern.test(loginUserInput.password);
           if (isPasswordValid) {
-            setUserPasswordError("");
+            setPasswordError("");
 
             await axios
-              .post("http://localhost:9000/user/login")
+              .post("http://localhost:9000/user/login", loginUserInput)
               .then((res) => {
-                console.log(res);
+                setToken(res.data.token);
+                cookies.set("jwt_authorization", token, {
+                  expires: new Date(decodedToken * 1000),
+                });
+                navigate("/admin");
+                setBackendResponse("");
               })
               .catch((err) => {
-                console.log(err.response.data.error);
+                if (err) throw err;
                 setBackendResponse(err.response.data.error);
               });
           } else {
-            setUserPasswordError(
+            setPasswordError(
               "Password must have 8 digit and one capital, one small letter, one number, one symbol"
             );
           }
         } else {
-          setUserPasswordError("Please enter password");
+          setPasswordError("Please enter password");
         }
       } else {
-        setUserEmailError("Enter valid email");
+        setMobileNoError("Mobile no only in 10 digits");
       }
     } else {
-      setUserEmailError("Please enter email");
+      setMobileNoError("Please enter mobile no");
     }
   };
   return (
@@ -112,24 +122,24 @@ function Login() {
             <div className="col-12 ">
               <input
                 className="form-control"
-                name="userEmail"
+                name="mobileNo"
                 type="text"
-                placeholder="Enter Email"
-                value={loginUserInput.userEmail}
+                placeholder="Enter Mobile No"
+                value={loginUserInput.mobileNo}
                 onChange={addUserData}
               />
               <p className=" text-danger text-start fw-bolder my-1 ">
-                {userEmailError}
+                {mobileNoError}
               </p>
             </div>
 
             <div className="col-12 ">
               <div className="passwordControl">
                 <input
-                  name="userPassword"
+                  name="password"
                   type={passType}
                   placeholder="Enter Password"
-                  value={loginUserInput.userPassword}
+                  value={loginUserInput.password}
                   onChange={addUserData}
                 />
                 <img
@@ -141,7 +151,7 @@ function Login() {
                 />
               </div>
               <p className=" text-danger text-start fw-bolder my-1 ">
-                {userPasswordError}
+                {passwordError}
               </p>
             </div>
 

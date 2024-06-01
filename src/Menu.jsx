@@ -16,7 +16,6 @@ function Menu() {
       rateing: 4.4,
       deliveryTime: 20,
       offer: 30,
-      hotelName: "Vamsavali",
       image: "/img/menu/chicken.png",
       type: "veg",
     },
@@ -138,7 +137,7 @@ function Menu() {
       price: 630,
       rateing: 4.4,
       deliveryTime: 20,
-      offer: 30,
+      offer: null,
       hotelName: "Vamsavali",
 
       image: "/img/menu/chicken.png",
@@ -151,7 +150,7 @@ function Menu() {
       price: 230,
       rateing: 4.4,
       deliveryTime: 20,
-      offer: 30,
+      offer: 5,
       hotelName: "Vamsavali",
       image: "/img/menu/chicken.png",
       type: "nonVeg",
@@ -163,7 +162,7 @@ function Menu() {
       price: 230,
       rateing: 4.4,
       deliveryTime: 20,
-      offer: 30,
+      offer: null,
       hotelName: "Vamsavali",
       image: "/img/menu/chicken.png",
       type: "veg",
@@ -175,7 +174,7 @@ function Menu() {
       price: 230,
       rateing: 4.4,
       deliveryTime: 20,
-      offer: 30,
+      offer: 10,
       hotelName: "Vamsavali",
       image: "/img/menu/chicken.png",
       type: "veg",
@@ -211,7 +210,7 @@ function Menu() {
       price: 230,
       rateing: 4.4,
       deliveryTime: 20,
-      offer: 30,
+      offer: null,
       hotelName: "Vamsavali",
       image: "/img/menu/chicken.png",
       type: "veg",
@@ -223,7 +222,7 @@ function Menu() {
       price: 230,
       rateing: 4.4,
       deliveryTime: 20,
-      offer: 30,
+      offer: null,
       hotelName: "Vamsavali",
       image: "/img/menu/chicken.png",
       type: "veg",
@@ -235,7 +234,7 @@ function Menu() {
       price: 230,
       rateing: 4.4,
       deliveryTime: 20,
-      offer: 30,
+      offer: null,
       hotelName: "Vamsavali",
       image: "/img/menu/chicken.png",
       type: "veg",
@@ -247,7 +246,7 @@ function Menu() {
       price: 230,
       rateing: 4.4,
       deliveryTime: 20,
-      offer: 30,
+      offer: 5,
       hotelName: "Vamsavali",
       image: "/img/menu/chicken.png",
       type: "veg",
@@ -275,8 +274,9 @@ function Menu() {
 
   return (
     <>
-      {/* <!-- Menu Section start --> */}
       <Toaster position="top-right" reverseOrder={false} />
+
+      {/* <!-- Menu Section start --> */}
       <section id="menu-section" className="container pt-5 pb-5">
         <div className="text-center">
           <h1>Let's make your choice</h1>
@@ -325,9 +325,13 @@ function Menu() {
               className="col-12 col-sm-6 col-md-4 col-lg-3 p-3 text-center"
             >
               <div className="card menu-card h-100 bg-light overflow-hidden bg-opacity-25 position-relative ">
-                <div className="badge bg-primary top-0 start-0 rounded-0 position-absolute ">
-                  25% off
-                </div>
+                {food.offer !== null ? (
+                  <div className="badge bg-primary top-0 start-0 rounded-0 position-absolute ">
+                    {food.offer}% off
+                  </div>
+                ) : (
+                  <></>
+                )}
 
                 <Link to="order">
                   <div className="card-header  ">

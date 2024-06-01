@@ -20,6 +20,7 @@ import Admin from "./Admin/Admin";
 import AdminHeader from "./Admin/AdminHeader";
 import Profile from "./Admin/Profile";
 import FoodManagement from "./Admin/FoodManagement";
+import PageNotFound from "./PageNotFound";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -49,24 +50,28 @@ function App() {
 
       <Routes>
         <Route path="" element={<Header />}>
-          <Route path="" element={<Home />}></Route>
+          <Route index element={<Home />}></Route>
           <Route path="menu" element={<Menu />}></Route>
           <Route path="gallery" element={<Gallery />}></Route>
           <Route path="about" element={<About />}></Route>
           <Route path="login" element={<Login />}></Route>
           <Route path="register" element={<Register />}></Route>
           <Route path="forget" element={<Forget />}></Route>
+          <Route path="*" element={<PageNotFound />}></Route>
         </Route>
         <Route path="admin" element={<Admin />}>
           <Route path="menu" element={<MenuAdmin />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="management" element={<Management />} />
+          <Route path="order" element={<Management />} />
           <Route path="sales" element={<Sales />} />
           <Route path="users" element={<Users />} />
           <Route path="settings" element={<Settings />} />
           <Route path="report" element={<Report />} />
           <Route path="foods" element={<FoodManagement />} />
+          <Route path="*" element={<PageNotFound />}></Route>
         </Route>
+        <Route path="*" element={<PageNotFound />}></Route>
+
         {/* <Route path="" element={<Footer />}></Route> */}
       </Routes>
     </>
