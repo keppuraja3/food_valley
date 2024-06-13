@@ -3,15 +3,16 @@ import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { SyncLoader } from "react-spinners";
 
 function Register() {
-  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+  const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
+  const [loading, setLoading] = useState(false);
   // Navigation variable--
   const navigate = useNavigate();
 
   // Register user info variable
-
   const [regUserInput, setRegUserInput] = useState({
     username: "",
     mobileNo: "",
@@ -75,10 +76,10 @@ function Register() {
                     if (!regUserInput.password2 == "") {
                       if (regUserInput.password == regUserInput.password2) {
                         setPassword2Error("");
-
+                        setLoading(true);
                         // Add new user to the backend
                         axios
-                          .post(`${BACKEND_URL}/user/register`, regUserInput)
+                          .post(`${SERVER_URL}/user/register`, regUserInput)
                           .then((response) => {
                             navigate("/login");
                             console.log(response.data);
@@ -88,6 +89,7 @@ function Register() {
                             console.log(err.response.data.error);
                             setBackendResponse(err.response.data.error);
                           });
+                        setLoading(false);
                       } else {
                         setPassword2Error("Password does not match");
                       }
@@ -210,9 +212,15 @@ function Register() {
             </div>
 
             <div className="col-12 ">
-              <button className="btn btn-danger " type="submit">
-                Create Account
-              </button>
+              {loading ? (
+                <button className="btn btn-danger fw-bolder py-2" type="submit">
+                  <SyncLoader color="#ffffff" />
+                </button>
+              ) : (
+                <button className="btn btn-danger " type="submit">
+                  Create Account
+                </button>
+              )}
             </div>
             <span>
               Already have a Account{" "}

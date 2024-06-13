@@ -8,6 +8,7 @@ import Row from "react-bootstrap/Row";
 import InputGroup from "react-bootstrap/InputGroup";
 
 // React Icons Importing
+
 import { FaClock, FaStar } from "react-icons/fa";
 import { FaIndianRupeeSign, FaImage } from "react-icons/fa6";
 import { RiDiscountPercentFill } from "react-icons/ri";
@@ -16,15 +17,36 @@ import { ImSpoonKnife } from "react-icons/im";
 // import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 function Menu() {
-  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+  const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
   const [menuForm, setMenuForm] = useState(false);
+
+  const [imgFile, setImgFile] = useState(null);
+  const [formInput, setFormInput] = useState({});
 
   const handleMenuFormClose = () => setMenuForm(false);
   const handleMenuFormShow = () => setMenuForm(true);
 
   const notifySuccess = (msg) => toast.success(msg);
   const notifyError = (msg) => toast.error(msg);
+
+  const handleImgFileChange = (e) => {
+    setImgFile(e.target.files[0]);
+  };
+
+  const addFormInput = (e) => {
+    setFormInput({ ...formInput, [e.target.name]: e.target.value });
+  };
+
+  // form submit function---
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("food_menu_image", imgFile);
+    formData.append("food_menu_data");
+  };
 
   // Promise hot toast---------
 
@@ -43,7 +65,10 @@ function Menu() {
       {/* menu add and update form modal */}
       <Modal show={menuForm} onHide={handleMenuFormClose} centered>
         <Modal.Body className="bg-transparent p-0 ">
-          <Form className=" bg-dark p-3 rounded-3 border border-1 border-light">
+          <Form
+            className=" bg-dark p-3 rounded-3 border border-1 border-light"
+            onSubmit={handleSubmit}
+          >
             <h3 className="text-center text-uppercase">Add Item</h3>
 
             <InputGroup as={Col} className="mb-3">
@@ -52,9 +77,12 @@ function Menu() {
               </InputGroup.Text>
               <Form.Control
                 type="text"
+                name="name"
+                value={formData.name}
+                onChange={addFormInput}
                 placeholder="Enter menu name"
                 autoFocus
-                // readOnly
+                //--> readOnly <--
               />
             </InputGroup>
 
@@ -63,14 +91,27 @@ function Menu() {
                 <InputGroup.Text>
                   <FaIndianRupeeSign />
                 </InputGroup.Text>
-                <Form.Control type="number" md={6} placeholder="Enter price" />
+                <Form.Control
+                  type="number"
+                  name="price"
+                  value={formData.price}
+                  onChange={addFormInput}
+                  md={6}
+                  placeholder="Enter price"
+                />
               </InputGroup>
 
               <InputGroup as={Col} className="mb-3">
                 <InputGroup.Text>
                   <FaClock />
                 </InputGroup.Text>
-                <Form.Control type="email" placeholder="Enter delivery time" />
+                <Form.Control
+                  type="number"
+                  name="deliveryTime"
+                  value={formData.deliveryTime}
+                  onChange={addFormInput}
+                  placeholder="Enter delivery time"
+                />
               </InputGroup>
             </Row>
             <Row>
@@ -78,7 +119,13 @@ function Menu() {
                 <InputGroup.Text>
                   <FaStar />
                 </InputGroup.Text>
-                <Form.Control type="number" placeholder="Enter rating" />
+                <Form.Control
+                  type="number"
+                  name="rating"
+                  value={formData.rating}
+                  onChange={addFormInput}
+                  placeholder="Enter rating"
+                />
               </InputGroup>
 
               <InputGroup as={Col} className="mb-3">
@@ -87,6 +134,9 @@ function Menu() {
                 </InputGroup.Text>
                 <Form.Control
                   type="email"
+                  name="offer"
+                  value={formData.offer}
+                  onChange={addFormInput}
                   placeholder="Enter offer (optional)"
                 />
               </InputGroup>
@@ -96,12 +146,19 @@ function Menu() {
               <InputGroup.Text>
                 <FaImage />
               </InputGroup.Text>
-              <Form.Control type="file" placeholder="Select item image" />
+              <Form.Control
+                type="file"
+                onChange={handleImgFileChange}
+                required
+              />
             </InputGroup>
 
             <Form.Select
               className="mb-3"
               aria-label="Floating label select example"
+              name="type"
+              value={formData.type}
+              onChange={addFormInput}
             >
               <option>Select menu type</option>
               <option value="veg">Veg</option>
@@ -115,13 +172,20 @@ function Menu() {
               <Form.Control
                 as="textarea"
                 rows={3}
+                name="decription"
+                value={formData.decription}
+                onChange={addFormInput}
                 placeholder="Enter description"
               />
             </Form.Group>
 
             <div className="w-100 d-flex justify-content-around">
               <Button variant="primary">Submit</Button>
-              <Button variant="danger" onClick={handleMenuFormClose}>
+              <Button
+                variant="danger"
+                type="button"
+                onClick={handleMenuFormClose}
+              >
                 Cancel
               </Button>
             </div>

@@ -79,9 +79,9 @@ function Admin() {
                         : ""
                     } `}
                     onClick={handleSideBarClose}
-                    to="order"
+                    to="orders"
                   >
-                    Order
+                    Orders
                   </Link>
                 </li>
 
@@ -167,9 +167,9 @@ function Admin() {
                         ? "active-link"
                         : ""
                     } `}
-                    to="order"
+                    to="orders"
                   >
-                    Order
+                    Orders
                   </Link>
                 </li>
 

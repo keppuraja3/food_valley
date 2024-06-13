@@ -5,10 +5,13 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 import { useJwt } from "react-jwt";
 import { useNavigate } from "react-router-dom";
+import { SyncLoader } from "react-spinners";
 
 function Login() {
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
-  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+  const SERVER_URL = import.meta.env.VITE_SERVER_URL;
   const [token, setToken] = useState("");
   const { decodedToken, isExpired } = useJwt(token);
 
@@ -72,21 +75,24 @@ function Login() {
           const isPasswordValid = passwordPattern.test(loginUserInput.password);
           if (isPasswordValid) {
             setPasswordError("");
-
+            setLoading(true);
             await axios
-              .post(`${BACKEND_URL}/user/login`, loginUserInput)
+              .post(`${SERVER_URL}/user/login`, loginUserInput)
               .then((res) => {
                 setToken(res.data.token);
-                cookies.set("jwt_authorization", token, {
-                  expires: new Date(decodedToken * 1000),
-                });
-                navigate("/admin");
+                // cookies.set("jwt_authorization", token, {
+                //   expires: new Date(decodedToken * 1000),
+                // });
+                localStorage.setItem("food-valley-user-token", res.data.token);
+                // navigate("/admin");
+                navigate("/");
                 setBackendResponse("");
               })
               .catch((err) => {
                 if (err) throw err;
                 setBackendResponse(err.response.data.error);
               });
+            setLoading(false);
           } else {
             setPasswordError(
               "Password must have 8 digit and one capital, one small letter, one number, one symbol"
@@ -156,9 +162,15 @@ function Login() {
             </div>
 
             <div className="col-12 ">
-              <button className="btn btn-danger " type="submit">
-                Login
-              </button>
+              {loading ? (
+                <button className="btn btn-danger fw-bolder py-2" type="submit">
+                  <SyncLoader color="#ffffff" />
+                </button>
+              ) : (
+                <button className="btn btn-danger fw-bolder" type="submit">
+                  Login
+                </button>
+              )}
             </div>
             <span>
               <Link to="/forget" className="text-warning text-decoration-none ">

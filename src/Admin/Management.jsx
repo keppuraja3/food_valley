@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 function Management() {
-  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+  const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
   return (
     <>

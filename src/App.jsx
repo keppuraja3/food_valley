@@ -6,6 +6,7 @@ import Menu from "./Menu";
 import Gallery from "./Gallery";
 import About from "./About";
 import Login from "./Login";
+import Order from "./Order";
 import Register from "./Register";
 import Forget from "./Forget";
 import Footer from "./Footer";
@@ -54,6 +55,7 @@ function App() {
           <Route path="menu" element={<Menu />}></Route>
           <Route path="gallery" element={<Gallery />}></Route>
           <Route path="about" element={<About />}></Route>
+          <Route path="order" element={<Order />}></Route>
           <Route path="login" element={<Login />}></Route>
           <Route path="register" element={<Register />}></Route>
           <Route path="forget" element={<Forget />}></Route>
@@ -62,7 +64,7 @@ function App() {
         <Route path="admin" element={<Admin />}>
           <Route path="menu" element={<MenuAdmin />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="order" element={<Management />} />
+          <Route path="orders" element={<Management />} />
           <Route path="sales" element={<Sales />} />
           <Route path="users" element={<Users />} />
           <Route path="settings" element={<Settings />} />
