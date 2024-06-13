@@ -9,6 +9,7 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 function Header() {
   const location = useLocation();
+
   return (
     <>
       {/* <!-- navigation bar start --> */}

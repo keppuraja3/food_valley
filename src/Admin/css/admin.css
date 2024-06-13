@@ -1,7 +1,15 @@
 *{
     scroll-behavior: smooth;
     transition: all .4s;
+    box-sizing: border-box;
 }
+
+/* newly added */
+body{
+    height: 100vh;
+}
+
+
 
 .sidebar-container{
     min-height: 80vh;

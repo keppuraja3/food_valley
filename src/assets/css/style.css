@@ -23,6 +23,9 @@
 body {
   background: #2b303a;
   color: #fff;
+  /* newly changed */
+  height: 100vh;
+  
   scroll-behavior: smooth;
 }
 

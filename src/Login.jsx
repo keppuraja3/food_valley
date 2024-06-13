@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 function Login() {
   const navigate = useNavigate();
-
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
   const [token, setToken] = useState("");
   const { decodedToken, isExpired } = useJwt(token);
 
@@ -74,7 +74,7 @@ function Login() {
             setPasswordError("");
 
             await axios
-              .post("http://localhost:9000/user/login", loginUserInput)
+              .post(`${BACKEND_URL}/user/login`, loginUserInput)
               .then((res) => {
                 setToken(res.data.token);
                 cookies.set("jwt_authorization", token, {

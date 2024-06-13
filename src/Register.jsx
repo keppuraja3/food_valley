@@ -5,6 +5,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Register() {
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
   // Navigation variable--
   const navigate = useNavigate();
 
@@ -76,10 +78,7 @@ function Register() {
 
                         // Add new user to the backend
                         axios
-                          .post(
-                            "http://localhost:9000/user/register",
-                            regUserInput
-                          )
+                          .post(`${BACKEND_URL}/user/register`, regUserInput)
                           .then((response) => {
                             navigate("/login");
                             console.log(response.data);

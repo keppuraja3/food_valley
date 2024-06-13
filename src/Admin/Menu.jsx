@@ -8,8 +8,10 @@ import Row from "react-bootstrap/Row";
 import InputGroup from "react-bootstrap/InputGroup";
 
 // React Icons Importing
-import { FaClock } from "react-icons/fa";
-import { FaIndianRupeeSign } from "react-icons/fa6";
+import { FaClock, FaStar } from "react-icons/fa";
+import { FaIndianRupeeSign, FaImage } from "react-icons/fa6";
+import { RiDiscountPercentFill } from "react-icons/ri";
+import { ImSpoonKnife } from "react-icons/im";
 
 // import FloatingLabel from "react-bootstrap/FloatingLabel";
 
@@ -42,32 +44,19 @@ function Menu() {
           <Form className=" bg-dark p-3 rounded-3 border border-1 border-light">
             <h3 className="text-center text-uppercase">Add Item</h3>
 
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <InputGroup as={Col} className="mb-3">
+              <InputGroup.Text>
+                <ImSpoonKnife />
+              </InputGroup.Text>
               <Form.Control
                 type="text"
                 placeholder="Enter menu name"
                 autoFocus
                 // readOnly
               />
-            </Form.Group>
-
-            {/* <FloatingLabel
-              controlId="floatingInput"
-              label="Email address"
-              className="mb-3"
-            >
-              <Form.Control type="email" placeholder="name@example.com" />
-            </FloatingLabel> */}
+            </InputGroup>
 
             <Row>
-              {/* <Form.Group
-                as={Col}
-                className="mb-3"
-                controlId="exampleForm.ControlInput1"
-              >
-                <Form.Control type="number" md={6} placeholder="Enter price" />
-              </Form.Group> */}
-
               <InputGroup as={Col} className="mb-3">
                 <InputGroup.Text>
                   <FaIndianRupeeSign />
@@ -79,34 +68,34 @@ function Menu() {
                 <InputGroup.Text>
                   <FaClock />
                 </InputGroup.Text>
+                <Form.Control type="email" placeholder="Enter delivery time" />
+              </InputGroup>
+            </Row>
+            <Row>
+              <InputGroup as={Col} className="mb-3">
+                <InputGroup.Text>
+                  <FaStar />
+                </InputGroup.Text>
                 <Form.Control type="number" placeholder="Enter rating" />
               </InputGroup>
 
-            </Row>
-            <Row>
-              <Form.Group
-                as={Col}
-                className="mb-3"
-                controlId="exampleForm.ControlInput1"
-              >
-                <Form.Control type="email" placeholder="Enter delivery time" />
-              </Form.Group>
-
-              <Form.Group
-                as={Col}
-                className="mb-3"
-                controlId="exampleForm.ControlInput1"
-              >
+              <InputGroup as={Col} className="mb-3">
+                <InputGroup.Text>
+                  <RiDiscountPercentFill />
+                </InputGroup.Text>
                 <Form.Control
                   type="email"
                   placeholder="Enter offer (optional)"
                 />
-              </Form.Group>
+              </InputGroup>
             </Row>
 
-            <Form.Group controlId="formFile" className="mb-3">
+            <InputGroup as={Col} className="mb-3">
+              <InputGroup.Text>
+                <FaImage />
+              </InputGroup.Text>
               <Form.Control type="file" placeholder="Select item image" />
-            </Form.Group>
+            </InputGroup>
 
             <Form.Select
               className="mb-3"
