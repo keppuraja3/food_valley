@@ -4,6 +4,8 @@ import Footer from "./Footer";
 import toast, { Toaster } from "react-hot-toast";
 
 function Menu() {
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
   // Toast
   const notifySuccess = (msg) => toast.success(msg);
 

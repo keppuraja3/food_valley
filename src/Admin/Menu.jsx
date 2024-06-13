@@ -16,6 +16,8 @@ import { ImSpoonKnife } from "react-icons/im";
 // import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 function Menu() {
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
   const [menuForm, setMenuForm] = useState(false);
 
   const handleMenuFormClose = () => setMenuForm(false);

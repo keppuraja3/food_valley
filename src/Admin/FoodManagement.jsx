@@ -6,6 +6,8 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import SideBar from "./SideBar";
 
 function FoodManagement() {
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
   const [foodMenu, setFoodMenu] = useState([
     {
       id: 1,

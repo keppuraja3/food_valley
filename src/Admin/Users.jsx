@@ -3,10 +3,12 @@ import axios from "axios";
 import Table from "react-bootstrap/Table";
 
 function Users() {
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
   const [users, SetUsers] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:9000/user/list")
+      .get(`${BACKEND_URL}/user/list`)
       .then((res) => {
         console.log(res);
         SetUsers(res.data);
