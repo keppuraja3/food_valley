@@ -75,6 +75,11 @@ function Footer() {
                 Youtube
               </Link>
             </p>
+            <p>
+              <Link to="/admin" className="text-secondary ">
+                Admin
+              </Link>
+            </p>
           </div>
           <hr />
           <div className="text-center text-capitalize">
