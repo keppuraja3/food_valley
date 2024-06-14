@@ -46,7 +46,7 @@ function Register() {
     /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
   const emailPattern = /^[^\.\s][\w\-]+(\.[\w\-]+)*@([\w-]+\.)+[\w-]{2,}$/;
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
 
     // Username validation
@@ -78,7 +78,7 @@ function Register() {
                         setPassword2Error("");
                         setLoading(true);
                         // Add new user to the backend
-                        axios
+                        await axios
                           .post(`${SERVER_URL}/user/register`, regUserInput)
                           .then((response) => {
                             navigate("/login");
