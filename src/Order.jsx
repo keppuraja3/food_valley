@@ -1,10 +1,11 @@
 import React from "react";
+import Accordion from "react-bootstrap/Accordion";
 
 function Order() {
   return (
     <>
       {/* <!-- Order section start --> */}
-      <section className="container-fluid" id="order-section">
+      <section className="container-fluid pb-5 mb-5" id="order-section">
         <div className="container border rounded border-secondary pt-3 mb-5 ">
           <h1 className="text-capitalize text-center">order</h1>
           <div className="row justify-content-around ">
@@ -23,7 +24,7 @@ function Order() {
               </div>
             </div>
             <div className="col-12 col-md-6  col-sm-12 col-lg-5 ">
-              <div className="card bg-transparent border-0 fs-3 fw-bold d-flex justify-content-between align-content-center  h-75 m-3 text-center text-uppercase ">
+              <div className="card bg-transparent text-light border-0 fs-3 fw-bold d-flex justify-content-between align-content-center  h-75 m-3 text-center text-uppercase ">
                 <p>gril chiken</p>
 
                 <p className="text-capitalize fw-light fs-5 ">
@@ -79,52 +80,20 @@ function Order() {
             </div>
           </div>
 
-          <div
-            className="accordion accordion-flush text-light m-3 mt-0"
-            id="accordionFlushExample"
-          >
-            <div className="accordion-item bg-dark">
-              <h2 className="accordion-header" id="flush-headingOne">
-                <button
-                  className="accordion-button rounded collapsed bg-warning text-dark fw-bolder fs-5 text-capitalize"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#flush-collapseOne"
-                  aria-expanded="false"
-                  aria-controls="flush-collapseOne"
-                >
-                  description
-                </button>
-              </h2>
-              <div
-                id="flush-collapseOne"
-                className="accordion-collapse collapse"
-                aria-labelledby="flush-headingOne"
-                data-bs-parent="#accordionFlushExample"
-              >
-                <div className="accordion-body">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Voluptate, quia. Ratione ipsum nemo cum illum adipisci vitae.
-                  Hic, quia velit nemo eum voluptate ut beatae facere similique
-                  optio rem ipsum. Sit recusandae minima est expedita, harum
-                  libero quidem ipsum rerum? Omnis fuga ducimus ratione
-                  voluptatem voluptas, nulla cumque accusamus. Possimus optio
-                  quos modi rerum? Veniam aliquid maxime facere deleniti
-                  necessitatibus. Beatae nostrum ut quidem repudiandae illum
-                  reiciendis aperiam, maiores molestias magni libero, quos, eum
-                  aliquid! Earum saepe labore harum quia quam maxime nemo libero
-                  provident cum illo, aut architecto quibusdam? Odit
-                  exercitationem voluptatibus enim atque illum earum, vitae
-                  tenetur aliquid at odio, quas assumenda dolore quia ex nostrum
-                  eveniet aliquam quibusdam expedita itaque placeat sapiente
-                  veniam repellendus, suscipit ut. Optio. Esse laborum sit
-                  corrupti debitis! Animi recusandae quis quae magnam, rem
-                  molestias consequatur assumenda velclass. This is the first
-                  item's accordion body.
-                </div>
-              </div>
-            </div>
-          </div>
+          <Accordion className="mb-3 bg-warning rounded">
+            <Accordion.Item className=" bg-dark text-light">
+              <Accordion.Header>Description</Accordion.Header>
+              <Accordion.Body>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
         </div>
       </section>
       {/* <!-- Order section end --> */}

@@ -67,6 +67,12 @@ function Header() {
                   About
                 </Link>
               </li>
+              <li className="nav-item ">
+                <Link to="about" className={`nav-link fw-bolder m-2  `}>
+                  Account
+                </Link>
+              </li>
+              {/* login link  */}
               <li className="nav-item">
                 <Link
                   to="/login"
@@ -77,6 +83,7 @@ function Header() {
                   Login
                 </Link>
               </li>
+              {/* register link  */}
               <li className="nav-item">
                 <Link
                   to="/register"

@@ -16,12 +16,12 @@ import MenuAdmin from "./Admin/Menu";
 import Management from "./Admin/Management";
 import Sales from "./Admin/Sales";
 import Report from "./Admin/Report";
-import "./assets/css/style.css";
 import Admin from "./Admin/Admin";
 import AdminHeader from "./Admin/AdminHeader";
 import Profile from "./Admin/Profile";
 import FoodManagement from "./Admin/FoodManagement";
 import PageNotFound from "./PageNotFound";
+import "./assets/css/style.css";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -32,7 +32,7 @@ function App() {
     setScreenLoading(true);
     setTimeout(() => {
       setScreenLoading(false);
-    }, 1000);
+    }, 2500);
   }, []);
   return (
     <>

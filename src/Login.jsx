@@ -12,8 +12,9 @@ function Login() {
 
   const navigate = useNavigate();
   const SERVER_URL = import.meta.env.VITE_SERVER_URL;
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(null);
   const { decodedToken, isExpired } = useJwt(token);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   // Initialize cookies
   const cookies = new Cookies();
@@ -83,9 +84,8 @@ function Login() {
                 // cookies.set("jwt_authorization", token, {
                 //   expires: new Date(decodedToken * 1000),
                 // });
-                localStorage.setItem("food-valley-user-token", res.data.token);
-                // navigate("/admin");
-                navigate("/");
+                localStorage.setItem("token", res.data.token);
+                setLoggedIn(true);
                 setBackendResponse("");
               })
               .catch((err) => {
@@ -108,6 +108,16 @@ function Login() {
       setMobileNoError("Please enter mobile no");
     }
   };
+
+  // Redirect to admin page or user page validation---
+  if (loggedIn) {
+    if (decodedToken.role === "admin") {
+      navigate("/admin");
+    } else if (decodedToken.role === "user") {
+      navigate("/");
+    }
+  }
+
   return (
     <>
       <section
