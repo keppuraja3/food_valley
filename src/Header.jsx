@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import Button from "react-bootstrap/Button";
@@ -7,7 +7,22 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import { useJwt } from "react-jwt";
+
 function Header() {
+  const [isUser, setIsUser] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const { decodedToken, isExpired } = useJwt(token);
+
+    if (decodedToken._id) {
+      setIsUser(true);
+    } else {
+      setIsUser(false);
+    }
+  }, []);
+
   const location = useLocation();
 
   return (
@@ -67,33 +82,39 @@ function Header() {
                   About
                 </Link>
               </li>
-              <li className="nav-item ">
-                <Link to="about" className={`nav-link fw-bolder m-2  `}>
-                  Account
-                </Link>
-              </li>
-              {/* login link  */}
-              <li className="nav-item">
-                <Link
-                  to="/login"
-                  className={`nav-link fw-bolder m-2  ${
-                    location.pathname == "/login" ? "active" : ""
-                  }  `}
-                >
-                  Login
-                </Link>
-              </li>
-              {/* register link  */}
-              <li className="nav-item">
-                <Link
-                  to="/register"
-                  className={`nav-link fw-bolder m-2  ${
-                    location.pathname == "/register" ? "active" : ""
-                  }  `}
-                >
-                  Register
-                </Link>
-              </li>
+              {isUser ? (
+                <li className="nav-item ">
+                  <Link to="about" className={`nav-link fw-bolder m-2  `}>
+                    Account
+                  </Link>
+                </li>
+              ) : (
+                <>
+                  {/* login link  */}
+
+                  <li className="nav-item">
+                    <Link
+                      to="/login"
+                      className={`nav-link fw-bolder m-2  ${
+                        location.pathname == "/login" ? "active" : ""
+                      }  `}
+                    >
+                      Login
+                    </Link>
+                  </li>
+                  {/* register link  */}
+                  <li className="nav-item">
+                    <Link
+                      to="/register"
+                      className={`nav-link fw-bolder m-2  ${
+                        location.pathname == "/register" ? "active" : ""
+                      }  `}
+                    >
+                      Register
+                    </Link>
+                  </li>
+                </>
+              )}
             </ul>
             {/* </Nav> */}
           </Navbar.Collapse>

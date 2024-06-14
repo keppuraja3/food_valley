@@ -16,9 +16,6 @@ function Login() {
   const { decodedToken, isExpired } = useJwt(token);
   const [loggedIn, setLoggedIn] = useState(false);
 
-  // Initialize cookies
-  const cookies = new Cookies();
-
   // Form Input Value variabels
   const [loginUserInput, setLoginUserInput] = useState({
     mobileNo: "",
@@ -81,9 +78,6 @@ function Login() {
               .post(`${SERVER_URL}/user/login`, loginUserInput)
               .then((res) => {
                 setToken(res.data.token);
-                // cookies.set("jwt_authorization", token, {
-                //   expires: new Date(decodedToken * 1000),
-                // });
                 localStorage.setItem("token", res.data.token);
                 setLoggedIn(true);
                 setBackendResponse("");
