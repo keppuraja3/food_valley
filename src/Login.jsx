@@ -14,6 +14,7 @@ function Login() {
   const SERVER_URL = import.meta.env.VITE_SERVER_URL;
   const [token, setToken] = useState(null);
   const { decodedToken, isExpired } = useJwt(token);
+
   const [loggedIn, setLoggedIn] = useState(false);
 
   // Form Input Value variabels
@@ -76,14 +77,20 @@ function Login() {
             setLoading(true);
             await axios
               .post(`${SERVER_URL}/user/login`, loginUserInput)
-              .then((res) => {
-                setToken(res.data.token);
-                localStorage.setItem("token", res.data.token);
-                setLoggedIn(true);
+              .then(async (res) => {
                 setBackendResponse("");
+                if (res.data.status) {
+                  localStorage.setItem("token", res.data.token);
+                  if (res.data.role === "admin") {
+                    navigate("/admin");
+                  } else if (res.data.role === "user") {
+                    navigate("/");
+                  }
+                  console.log(res.data.message);
+                }
               })
               .catch((err) => {
-                if (err) throw err;
+                console.log(err);
                 setBackendResponse(err.response.data.error);
               });
             setLoading(false);
@@ -104,13 +111,9 @@ function Login() {
   };
 
   // Redirect to admin page or user page validation---
-  if (loggedIn) {
-    if (decodedToken.role === "admin") {
-      navigate("/admin");
-    } else if (decodedToken.role === "user") {
-      navigate("/");
-    }
-  }
+  // if (loggedIn) {
+  //   console.log(decodedToken);
+  // }
 
   return (
     <>

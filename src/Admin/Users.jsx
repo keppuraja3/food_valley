@@ -10,7 +10,6 @@ function Users() {
     axios
       .get(`${SERVER_URL}/user/list`)
       .then((res) => {
-        console.log(res);
         SetUsers(res.data);
       })
       .catch((err) => {
@@ -21,28 +20,37 @@ function Users() {
   return (
     <>
       <h1>Users</h1>
-      <Table striped bordered hover variant="dark">
-        <thead>
-          <tr>
-            <th>S.No</th>
-            <th>Username</th>
-            <th>Mobile No</th>
-            <th>Email</th>
-            <th>Role</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user, index) => (
-            <tr key={user._id}>
-              <td>{index + 1}</td>
-              <td>{user.username}</td>
-              <td>{user.mobileNo}</td>
-              <td>{user.email}</td>
-              <td>{user.role}</td>
+      <div className="w-100 overflow-scroll p-2">
+        <Table striped bordered hover variant="dark">
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Username</th>
+              <th>Mobile No</th>
+              <th>Email</th>
+              <th>Role</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {users.map((user, index) => (
+              <tr key={user._id}>
+                <td>{index + 1}</td>
+                <td>{user.username}</td>
+                <td>{user.mobileNo}</td>
+                <td>{user.email}</td>
+                <td>{user.role}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
+      {users.length < 1 ? (
+        <div className="text-center">
+          <h1 className="text-center ">No data found</h1>
+        </div>
+      ) : (
+        <></>
+      )}
     </>
   );
 }

@@ -10,11 +10,16 @@ import { IoLogOut } from "react-icons/io5";
 import { FaUser } from "react-icons/fa";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
+import "./css/admin.css";
 
 function AdminHeader() {
   const location = useLocation();
-  const [showProfile, setShowProfile] = useState(false);
-  const target = useRef(null);
+  const [isOpen, setIsOpen] = useState(true);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <>
       {/* <!-- navigation bar start --> */}
@@ -30,46 +35,31 @@ function AdminHeader() {
           <Nav>
             {/* <Nav className="me-auto my-2 my-lg-0"> */}
             <ul className="navbar-nav ms-auto mb-md-0 mb-lg-0 text-center">
-              {/* <li className="nav-item">
-                <Link
-                  className={`nav-link fw-bolder m-2 d-flex align-items-center ${
-                    location.pathname == "profile" ? "active" : ""
-                  }  `}
-                  to="profile"
-                >
-                  <img src="/img/administrator.png" alt="" width={25} />
-                  <span className=" ms-1 d-none d-md-block">Admin</span>
-                </Link>
-              </li> */}
-              {/* <li className="nav-item d-grid align-items-center">
-                <div
-                  className="border border-1 border-light d-flex align-items-center m-1 p-1 rounded-pill"
-                  style={{ cursor: "pointer" }}
-                >
-                  <img src="/img/administrator.png" alt="" width={25} />
-
-                  <span
-                    ref={target}
-                    onClick={() => setShowProfile(!showProfile)}
-                  >
-                    Admin
-                  </span>
+              <li className="nav-item d-grid align-items-center">
+                <div className="profile-dropdown">
+                  <button className="profile-button" onClick={toggleDropdown}>
+                    <img
+                      src="/img/administrator.png"
+                      alt="Profile"
+                      className="profile-pic"
+                    />
+                    <span className="profile-name text-light">Admin</span>
+                  </button>
+                  {isOpen && (
+                    <div className="dropdown-menu">
+                      <a href="/profile" className="dropdown-item">
+                        Profile
+                      </a>
+                      <a href="/settings" className="dropdown-item">
+                        Settings
+                      </a>
+                      <a href="/logout" className="dropdown-item">
+                        Logout
+                      </a>
+                    </div>
+                  )}
                 </div>
-              </li> */}
-              <DropdownButton
-                id="dropdown-basic-button"
-                title="Admin"
-                className=" me-2"
-              >
-                <Dropdown.Item href="#/action-1">Profile</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Change Password</Dropdown.Item>
-                <Dropdown.Item className="  text-danger">
-                  Logout <IoLogOut />
-                </Dropdown.Item>
-              </DropdownButton>
-              <Button variant="outline-danger" className=" fw-bolder">
-                Logout <IoLogOut />
-              </Button>
+              </li>
             </ul>
 
             {/* </Nav> */}

@@ -1,17 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Col, Container, Row } from "react-bootstrap";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { Link } from "react-router-dom";
 import AdminHeader from "./AdminHeader";
 import Nav from "react-bootstrap/Nav";
+import axios from "axios";
+import { useJwt } from "react-jwt";
 import "./css/admin.css";
 
 function Admin() {
   const [sideBarShow, setSideBarShow] = useState(false);
-
+  const SERVER_URL = import.meta.env.VITE_SERVER_URL;
   const location = useLocation();
+  const navigate = useNavigate();
+  const { decodedToken, isExpired } = useJwt(localStorage.getItem("token"));
+  // useEffect(() => {
+  // console.log(decodedToken);
+  // if (decodedToken.role == "a") {
+  //   // navigate("/");
+  // } else {
+  //   navigate(`/`);
+  // }
+  // // }, []);
 
   const handleSideBarClose = () => {
     setSideBarShow(false);
@@ -21,6 +33,8 @@ function Admin() {
   return (
     <>
       <AdminHeader />
+
+      {/* Side nav container */}
       <Offcanvas
         show={sideBarShow}
         onHide={handleSideBarClose}
@@ -231,7 +245,7 @@ function Admin() {
               </ul>
             </div>
           </Col>
-          <Col lg={9} sm={12}>
+          <Col lg={10} sm={12}>
             <Outlet />
           </Col>
         </Row>

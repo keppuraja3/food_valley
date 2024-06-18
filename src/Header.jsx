@@ -69,8 +69,8 @@ function Header() {
                   About
                 </Link>
               </li>
-              {/* login link  */}
 
+              {/* login link  */}
               <li className="nav-item">
                 <Link
                   to="/login"
