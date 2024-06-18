@@ -17,6 +17,9 @@ import { ImSpoonKnife } from "react-icons/im";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 
+// Button loader animation gif
+import { SyncLoader } from "react-spinners";
+
 // import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 function Menu() {
@@ -38,6 +41,9 @@ function Menu() {
     type: "",
     image: "",
   });
+
+  // Loading boolean variable--
+  const [loading, setLoading] = useState(false);
 
   // Menu List getting method---
   const getMenuList = async () => {
@@ -92,7 +98,7 @@ function Menu() {
     const formData = new FormData();
     formData.append("menuimage", imgFile);
     formData.append("data", JSON.stringify(formInput));
-
+    setLoading(true);
     await axios
       .post(`${SERVER_URL}/menu`, formData, {
         headers: {
@@ -107,6 +113,7 @@ function Menu() {
       .catch((err) => {
         notifyError(err.message);
       });
+    setLoading(false);
   };
 
   // Delete menu items
@@ -270,9 +277,15 @@ function Menu() {
 
       <div className=" d-flex justify-content-between">
         <h1>Menu</h1>
-        <Button variant="primary" onClick={handleMenuFormShow}>
-          + Add
-        </Button>
+        {loading ? (
+          <Button variant="primary" onClick={handleMenuFormShow}>
+            + Add
+          </Button>
+        ) : (
+          <Button variant="primary">
+            <SyncLoader color="#ffffff" />
+          </Button>
+        )}
       </div>
       <div className="w-100 overflow-scroll pt-2 mt-2 table-container">
         <Table striped bordered hover variant="dark">
