@@ -260,9 +260,15 @@ function Menu() {
             </Form.Group>
 
             <div className="w-100 d-flex justify-content-around">
-              <Button variant="primary" type="submit">
-                Add
-              </Button>
+              {loading ? (
+                <Button variant="primary">
+                  <SyncLoader color="#ffffff" />
+                </Button>
+              ) : (
+                <Button variant="primary" type="submit">
+                  + Add
+                </Button>
+              )}
               <Button
                 variant="danger"
                 type="button"
@@ -277,16 +283,11 @@ function Menu() {
 
       <div className=" d-flex justify-content-between">
         <h1>Menu</h1>
-        {loading ? (
-          <Button variant="primary" onClick={handleMenuFormShow}>
-            + Add
-          </Button>
-        ) : (
-          <Button variant="primary">
-            <SyncLoader color="#ffffff" />
-          </Button>
-        )}
+        <Button variant="primary" onClick={handleMenuFormShow}>
+          + Add
+        </Button>
       </div>
+
       <div className="w-100 overflow-scroll pt-2 mt-2 table-container">
         <Table striped bordered hover variant="dark">
           <thead>
