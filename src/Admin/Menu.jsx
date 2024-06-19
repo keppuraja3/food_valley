@@ -102,7 +102,7 @@ function Menu() {
     setLoading(true);
     if (formInput._id) {
       await axios
-        .put(`${SERVER_URL}/menu`, formData, {
+        .put(`${SERVER_URL}/menu/${formInput._id}`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
