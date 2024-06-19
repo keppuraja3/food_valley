@@ -98,21 +98,39 @@ function Menu() {
     const formData = new FormData();
     formData.append("menuimage", imgFile);
     formData.append("data", JSON.stringify(formInput));
+
     setLoading(true);
-    await axios
-      .post(`${SERVER_URL}/menu`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((res) => {
-        notifySuccess(res.data.message);
-        getMenuList();
-        handleMenuFormClose();
-      })
-      .catch((err) => {
-        notifyError(err.message);
-      });
+    if (formInput._id) {
+      await axios
+        .put(`${SERVER_URL}/menu`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((res) => {
+          notifySuccess(res.data.message);
+          getMenuList();
+          handleMenuFormClose();
+        })
+        .catch((err) => {
+          notifyError(err.message);
+        });
+    } else {
+      await axios
+        .post(`${SERVER_URL}/menu`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((res) => {
+          notifySuccess(res.data.message);
+          getMenuList();
+          handleMenuFormClose();
+        })
+        .catch((err) => {
+          notifyError(err.message);
+        });
+    }
     setLoading(false);
   };
 
@@ -130,6 +148,12 @@ function Menu() {
         console.log(err);
         notifyError(err.message);
       });
+  };
+
+  // Update menu items
+  const editMenu = (menu) => {
+    setFormInput(menu);
+    handleMenuFormShow();
   };
 
   // Promise hot toast---------
@@ -153,7 +177,11 @@ function Menu() {
             className=" bg-dark p-3 rounded-3 border border-1 border-light"
             onSubmit={handleSubmit}
           >
-            <h3 className="text-center text-uppercase">Add Item</h3>
+            {formInput._id ? (
+              <h3 className="text-center text-uppercase">Edit Item</h3>
+            ) : (
+              <h3 className="text-center text-uppercase">Add Item</h3>
+            )}
 
             <InputGroup as={Col} className="mb-3">
               <InputGroup.Text>
@@ -264,6 +292,10 @@ function Menu() {
                 <Button variant="primary">
                   <SyncLoader color="#ffffff" />
                 </Button>
+              ) : formInput._id ? (
+                <Button variant="primary" type="submit">
+                  Edit
+                </Button>
               ) : (
                 <Button variant="primary" type="submit">
                   + Add
@@ -318,19 +350,25 @@ function Menu() {
                 <td>{menu.offer === null ? "-" : menu.offer}</td>
                 <td>{menu.deliveryTime}</td>
                 <td>{menu.rating}</td>
-                <td className=" d-flex justify-content-around align-items-center">
-                  <Button className="mt-1 p-1" variant="primary">
-                    <FaEdit />
-                    Edit
-                  </Button>
-                  <Button
-                    className="mt-1 p-1"
-                    variant="danger"
-                    onClick={() => deleteMenu(menu._id)}
-                  >
-                    <MdDelete />
-                    Delte
-                  </Button>
+                <td>
+                  <div className=" d-flex justify-content-around align-items-center h-100">
+                    <Button
+                      className="mt-1 p-1"
+                      variant="primary"
+                      onClick={() => editMenu(menu)}
+                    >
+                      <FaEdit />
+                      Edit
+                    </Button>
+                    <Button
+                      className="mt-1 p-1"
+                      variant="danger"
+                      onClick={() => deleteMenu(menu._id)}
+                    >
+                      <MdDelete />
+                      Delte
+                    </Button>
+                  </div>
                 </td>
               </tr>
             ))}
