@@ -15,9 +15,8 @@ function About() {
               <img
                 style={{ objectFit: "cover" }}
                 className="img-fluid rounded h-100"
-                src="./img/about-2.jpg"
+                src="/img/about-2.jpg"
                 alt=""
-                srcset=""
               />
             </div>
             <div className="col-12 col-md-6 col-lg-6 p-2 order-1 order-lg-2">

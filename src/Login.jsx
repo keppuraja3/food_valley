@@ -4,11 +4,15 @@ import Footer from "./Footer";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import { useJwt } from "react-jwt";
+import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { SyncLoader } from "react-spinners";
 
 function Login() {
   const [loading, setLoading] = useState(false);
+
+  // Toast notification
+  const notifySuccess = (msg) => toast.success(msg);
 
   const navigate = useNavigate();
   const SERVER_URL = import.meta.env.VITE_SERVER_URL;
@@ -78,6 +82,7 @@ function Login() {
             await axios
               .post(`${SERVER_URL}/user/login`, loginUserInput)
               .then(async (res) => {
+                await notifySuccess(res.data.message);
                 setBackendResponse("");
                 if (res.data.status) {
                   localStorage.setItem("token", res.data.token);
@@ -86,7 +91,6 @@ function Login() {
                   } else if (res.data.role === "user") {
                     navigate("/");
                   }
-                  console.log(res.data.message);
                 }
               })
               .catch((err) => {
@@ -117,6 +121,8 @@ function Login() {
 
   return (
     <>
+      <Toaster position="top-right" reverseOrder={false} />
+
       <section
         style={{ margin: "10vh 0 15vh" }}
         className="container-fluid d-flex justify-contnt-center align-items-center"

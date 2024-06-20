@@ -37,7 +37,7 @@ function App() {
     <>
       {/*  Page pre loader content start */}
       {screenLoading ? (
-        <div id="loading" className=" position-absolute top-0 p-0 m-0">
+        <div id="loading" className=" position-fixed top-0 p-0 m-0">
           <div className="w-100 h-100 d-flex justify-content-center align-items-center  ">
             <img src="/img/dish.png" alt="loading" />
           </div>
@@ -54,7 +54,7 @@ function App() {
           <Route path="menu" element={<Menu />}></Route>
           <Route path="gallery" element={<Gallery />}></Route>
           <Route path="about" element={<About />}></Route>
-          <Route path="order" element={<Order />}></Route>
+          <Route path="order/:id" element={<Order />}></Route>
           <Route path="login" element={<Login />}></Route>
           <Route path="register" element={<Register />}></Route>
           <Route path="forget" element={<Forget />}></Route>

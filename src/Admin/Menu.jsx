@@ -351,7 +351,7 @@ function Menu() {
                 <td>{menu.deliveryTime}</td>
                 <td>{menu.rating}</td>
                 <td>
-                  <div className=" d-flex justify-content-around align-items-center h-100">
+                  <div className=" d-flex justify-content-around align-items-center h-100 gap-2">
                     <Button
                       className="mt-1 p-1"
                       variant="primary"
@@ -374,6 +374,11 @@ function Menu() {
             ))}
           </tbody>
         </Table>
+        {menuList.length == 0 ? (
+          <h1 className="text-center">No data found</h1>
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );

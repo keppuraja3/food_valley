@@ -14,7 +14,7 @@ function Footer() {
             className="position-absolute bg-dark rounded-circle"
             id="footer-logo"
           >
-            <img src="./img/dish.png" alt="logo" width="50" height="50" />
+            <img src="/img/dish.png" alt="logo" width="50" height="50" />
           </div>
           <div className="col-12 col-lg-3 col-md-6 ">
             <h4>
@@ -39,11 +39,8 @@ function Footer() {
             </p>
             <p className="text-secondary">
               Email:{" "}
-              <a
-                href="Mailto:Food Valley@gmail.com"
-                className="text-secondary "
-              >
-                Food Valley@gmail.com
+              <a href="Mailto:foodvalley@gmail.com" className="text-secondary ">
+                foodvalley@gmail.com
               </a>
             </p>
           </div>
@@ -81,7 +78,7 @@ function Footer() {
             <p>&copy; 2024 Food Valley. all rights reserved</p>
             <p>
               designed by
-              <span className="text-warning ">keppuraja</span>
+              <span className="text-warning "> keppuraja</span>
             </p>
           </div>
         </footer>

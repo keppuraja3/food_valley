@@ -1,9 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
 import Carousel from "react-bootstrap/Carousel";
 import { Container } from "react-bootstrap";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 function Home() {
+  const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+  const navigate = useNavigate();
+
+  const [menuList, setMenuList] = useState([]);
+  // Menu List getting method---
+  const getMenuList = async () => {
+    await axios
+      .get(`${SERVER_URL}/menu`)
+      .then((res) => {
+        setMenuList(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    getMenuList();
+  }, []);
+
   return (
     <>
       {/* <!-- Home-banner Section start --> */}
@@ -47,7 +69,7 @@ function Home() {
               className="col-12 col-md-5 col-lg-6 h-50  order-1 order-md-2 d-flex justify-content-center align-content-center"
             >
               <img
-                src="./img/menu/dosa.png"
+                src="/img/menu/dosa.png"
                 className="img-fluid "
                 alt="home-imag/e"
               />
@@ -64,289 +86,51 @@ function Home() {
         </div>
         <div className=" container-fluid">
           <div className="row g-4 mb-4 p-3 ">
-            <div className="col-12 col-sm-6 col-md-4 col-lg-3 p-3 text-center">
-              <div className="card menu-card h-100 bg-light overflow-hidden bg-opacity-25 position-relative ">
-                <div className="badge bg-primary top-0 start-0 rounded-0 position-absolute ">
-                  25% off
-                </div>
-                {/* <img
-                  className="position-absolute top-0 end-0 m-2 "
-                  id="like-heart"
-                  height="30"
-                  width="30"
-                  src="./img/heart.svg"
-                  alt="like heart"
-                  title="Add to Like"
-                /> */}
-                <Link to="order">
-                  <div className="card-header  ">
-                    <img
-                      className="card-img"
-                      src="./img/menu/biriyani.png"
-                      alt="biriyani"
-                    />
-                  </div>
-                </Link>
-                <div className="card-footer d-flex flex-column justify-content-around h-100  ">
-                  <div className="card-text  mb-3 text-light text-capitalize">
-                    biriyani
-                  </div>
-                  <div className=" text-capitalize text-center mb-3 text-light  ">
-                    Let's take a taste for good
-                  </div>
-                  <div className="d-flex justify-content-around  align-items-center row">
-                    <div className="badge col-3 text-light  text-center text-capitalize p-2 btn bg-gradient bg-danger   ">
-                      &#8377; 280
+            {menuList.slice(0, 8).map((food) => (
+              <div
+                key={food._id}
+                className="col-12 col-sm-6 col-md-4 col-lg-3 p-3 text-center"
+              >
+                <div className="card menu-card h-100 bg-light overflow-hidden bg-opacity-25 position-relative ">
+                  {food.offer !== null ? (
+                    <div className="badge bg-primary top-0 start-0 rounded-0 position-absolute ">
+                      {food.offer}% off
                     </div>
-                    <Link
-                      to="order"
-                      className="btn btn-success  col-8  text-light text-capitalize p-2 bg-gradient"
-                    >
-                      Add Cart
-                    </Link>
+                  ) : (
+                    <></>
+                  )}
+
+                  <Link to={`order/${food._id}`}>
+                    <div className="card-header  ">
+                      <img
+                        className="card-img"
+                        src={food.image}
+                        alt={food.name}
+                      />
+                    </div>
+                  </Link>
+                  <div className="card-footer d-flex flex-column justify-content-around h-100  ">
+                    <div className="card-text  mb-3 text-light text-capitalize">
+                      {food.name}
+                    </div>
+                    <div className=" text-capitalize text-center mb-3 text-light  ">
+                      {food.description}
+                    </div>
+                    <div className="d-flex justify-content-around  align-items-center row">
+                      <div className="badge col-3 text-light h-100 d-flex align-items-center justify-content-center text-center text-capitalize p-2 btn bg-gradient bg-danger   ">
+                        &#8377; {food.price}
+                      </div>
+                      <button
+                        onClick={() => navigate(`order/${food._id}`)}
+                        className="btn btn-success  col-8  text-light text-capitalize p-2 bg-gradient"
+                      >
+                        Order
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div className="col-12 col-sm-6 col-md-4 col-lg-3 p-3 text-center">
-              <div className="card menu-card h-100 bg-light overflow-hidden bg-opacity-25 position-relative ">
-                <Link to="order">
-                  <div className="card-header  ">
-                    <img
-                      className="card-img"
-                      src="./img/menu/chilli_chicken.png"
-                      alt="chilli chicken"
-                    />
-                  </div>
-                </Link>
-                <div className="card-footer d-flex flex-column justify-content-around h-100 ">
-                  <div className="card-text  mb-3 text-light text-capitalize">
-                    chilli chicken
-                  </div>
-                  <div className=" text-capitalize text-center mb-3 text-light  ">
-                    Let's take a taste for good
-                  </div>
-                  <div className="d-flex justify-content-around  align-items-center row">
-                    <div className="badge col-3 text-light  text-center text-capitalize p-2 btn bg-gradient bg-danger   ">
-                      &#8377; 310
-                    </div>
-                    <Link
-                      to="order"
-                      className="btn btn-success  col-8  text-light text-capitalize p-2 bg-gradient"
-                    >
-                      Add Cart
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-12 col-sm-6 col-md-4 col-lg-3 p-3 text-center">
-              <div className="card menu-card h-100 bg-light overflow-hidden bg-opacity-25 position-relative ">
-                <Link to="order">
-                  <div className="card-header  ">
-                    <img
-                      className="card-img"
-                      src="./img/menu/mutton-fry.png"
-                      alt="mutton fry"
-                    />
-                  </div>
-                </Link>
-                <div className="card-footer d-flex flex-column justify-content-around h-100  ">
-                  <div className="card-text  mb-3 text-light text-capitalize">
-                    mutton fry
-                  </div>
-                  <div className=" text-capitalize text-center mb-3 text-light  ">
-                    Let's take a taste for good
-                  </div>
-                  <div className="d-flex justify-content-around  align-items-center row">
-                    <div className="badge col-3 text-light  text-center text-capitalize p-2 btn bg-gradient bg-danger   ">
-                      &#8377; 280
-                    </div>
-                    <Link
-                      to="order"
-                      className="btn btn-success  col-8  text-light text-capitalize p-2 bg-gradient"
-                    >
-                      Add Cart
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-12 col-sm-6 col-md-4 col-lg-3 p-3 text-center">
-              <div className="card menu-card h-100 bg-light overflow-hidden bg-opacity-25 position-relative h-100 ">
-                <div className="badge bg-primary top-0 start-0 rounded-0 position-absolute ">
-                  20% off
-                </div>
-
-                <Link to="order">
-                  <div className="card-header  ">
-                    <img
-                      className="card-img"
-                      src="./img/menu/gril_chiken_set.png"
-                      alt="gril chiken set"
-                    />
-                  </div>
-                </Link>
-                <div className="card-footer d-flex flex-column justify-content-around h-100  ">
-                  <div className="card-text  mb-3 text-light text-capitalize">
-                    gril chiken set
-                  </div>
-                  <div className=" text-capitalize text-center mb-3 text-light  ">
-                    Let's take a taste for good
-                  </div>
-                  <div className="d-flex justify-content-around  align-items-center row">
-                    <div className="badge col-3 text-light  text-center text-capitalize p-2 btn bg-gradient bg-danger   ">
-                      &#8377; 300
-                    </div>
-                    <Link
-                      to="order"
-                      className="btn btn-success  col-8  text-light text-capitalize p-2 bg-gradient"
-                    >
-                      Add Cart
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-12 col-sm-6 col-md-4 col-lg-3 p-3 text-center">
-              <div className="card menu-card h-100 bg-light overflow-hidden bg-opacity-25 position-relative ">
-                <Link to="order">
-                  <div className="card-header  ">
-                    <img
-                      className="card-img mt-3 mb-3 "
-                      src="./img/menu/parotta non veg set.png"
-                      alt="parotta non veg set"
-                    />
-                  </div>
-                </Link>
-                <div className="card-footer d-flex flex-column justify-content-around h-100  ">
-                  <div className="card-text  mb-3 text-light text-capitalize">
-                    parotta non veg set
-                  </div>
-                  <div className=" text-capitalize text-center mb-3 text-light  ">
-                    Let's take a taste for good
-                  </div>
-                  <div className="d-flex justify-content-around  align-items-center row">
-                    <div className="badge col-3 text-light  text-center text-capitalize p-2 btn bg-gradient bg-danger   ">
-                      &#8377; 280
-                    </div>
-                    <Link
-                      to="order"
-                      className="btn btn-success  col-8  text-light text-capitalize p-2 bg-gradient"
-                    >
-                      Add Cart
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-12 col-sm-6 col-md-4 col-lg-3 p-3 text-center">
-              <div className="card menu-card h-100 bg-light overflow-hidden bg-opacity-25 position-relative ">
-                <div className="badge bg-primary top-0 start-0 rounded-0 position-absolute ">
-                  5% off
-                </div>
-
-                <Link to="order">
-                  <div className="card-header  ">
-                    <img
-                      className="card-img mt-5 mb-4 "
-                      src="./img/menu/aattu kal kulambu.png"
-                      alt="aattu kal kulambu"
-                    />
-                  </div>
-                </Link>
-                <div className="card-footer d-flex flex-column justify-content-around h-100 ">
-                  <div className="card-text  mb-3 text-light text-capitalize">
-                    aattu kal kulambu
-                  </div>
-                  <div className=" text-capitalize text-center mb-3 text-light  ">
-                    Let's take a taste for good
-                  </div>
-                  <div className="d-flex justify-content-around  align-items-center row">
-                    <div className="badge col-3 text-light  text-center text-capitalize p-2 btn bg-gradient bg-danger   ">
-                      &#8377; 310
-                    </div>
-                    <Link
-                      to="order"
-                      className="btn btn-success  col-8  text-light text-capitalize p-2 bg-gradient"
-                    >
-                      Add Cart
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-12 col-sm-6 col-md-4 col-lg-3 p-3 text-center">
-              <div className="card menu-card h-100 bg-light overflow-hidden bg-opacity-25 position-relative ">
-                <Link to="order">
-                  <div className="card-header  ">
-                    <img
-                      className="card-img"
-                      src="./img/menu/biriyani.png"
-                      alt="Briyani"
-                    />
-                  </div>
-                </Link>
-                <div className="card-footer d-flex flex-column justify-content-around h-100  ">
-                  <div className="card-text  mb-3 text-light text-capitalize">
-                    Briyani
-                  </div>
-                  <div className=" text-capitalize text-center mb-3 text-light  ">
-                    Let's take a taste for good
-                  </div>
-                  <div className="d-flex justify-content-around  align-items-center row">
-                    <div className="badge col-3 text-light  text-center text-capitalize p-2 btn bg-gradient bg-danger   ">
-                      &#8377; 280
-                    </div>
-                    <Link
-                      to="order"
-                      className="btn btn-success  col-8  text-light text-capitalize p-2 bg-gradient"
-                    >
-                      Add Cart
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-12 col-sm-6 col-md-4 col-lg-3 p-3 text-center">
-              <div className="card menu-card h-100 bg-light overflow-hidden bg-opacity-25 position-relative ">
-                <Link to="order">
-                  <div className="card-header  ">
-                    <img
-                      className="card-img"
-                      src="./img/menu/chicken.png"
-                      alt="chicken"
-                    />
-                  </div>
-                </Link>
-                <div className="card-footer d-flex flex-column justify-content-around h-100  ">
-                  <div className="card-text  mb-3 text-light text-capitalize">
-                    chicken
-                  </div>
-                  <div className=" text-capitalize text-center mb-3 text-light  ">
-                    Let's take a taste for good
-                  </div>
-                  <div className="d-flex justify-content-around  align-items-center row">
-                    <div className="badge col-3 text-light  text-center text-capitalize p-2 btn bg-gradient bg-danger   ">
-                      &#8377; 300
-                    </div>
-                    <Link
-                      to="order"
-                      className="btn btn-success  col-8  text-light text-capitalize p-2 bg-gradient"
-                    >
-                      Add Cart
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -365,7 +149,7 @@ function Home() {
                   <div className="chefs-social me-2 end-0 rounded p-2 d-grid gap-2 bg-dark bg-opacity-25 position-absolute">
                     <a href="www.instagram.com">
                       <img
-                        src="./img/chefs/instagram.png"
+                        src="/img/chefs/instagram.png"
                         height="30"
                         width="30"
                         alt="instagram"
@@ -373,7 +157,7 @@ function Home() {
                     </a>
                     <a href="www.facebook.com">
                       <img
-                        src="./img/chefs/facebook.png"
+                        src="/img/chefs/facebook.png"
                         height="30"
                         width="30"
                         alt="facebook"
@@ -381,7 +165,7 @@ function Home() {
                     </a>
                     <a href="www.twitter.com">
                       <img
-                        src="./img/chefs/twitter.png"
+                        src="/img/chefs/twitter.png"
                         height="30"
                         width="30"
                         alt="twitter"
@@ -389,7 +173,7 @@ function Home() {
                     </a>
                     <a href="tel:+917358905330">
                       <img
-                        src="./img/chefs/whatsapp.png"
+                        src="/img/chefs/whatsapp.png"
                         height="30"
                         width="30"
                         alt="whatsapp"
@@ -398,7 +182,7 @@ function Home() {
                   </div>
                   <img
                     className="img-fluid rounded border border-2 border-black "
-                    src="./img/chefs/chefs-1.jpg"
+                    src="/img/chefs/chefs-1.jpg"
                     alt="Chef"
                   />
                 </div>
@@ -419,7 +203,7 @@ function Home() {
                   <div className="chefs-social me-2 end-0 rounded p-2 d-grid gap-2 bg-dark bg-opacity-25 position-absolute">
                     <a href="www.instagram.com">
                       <img
-                        src="./img/chefs/instagram.png"
+                        src="/img/chefs/instagram.png"
                         height="30"
                         width="30"
                         alt="instagram"
@@ -427,7 +211,7 @@ function Home() {
                     </a>
                     <a href="www.facebook.com">
                       <img
-                        src="./img/chefs/facebook.png"
+                        src="/img/chefs/facebook.png"
                         height="30"
                         width="30"
                         alt="facebook"
@@ -435,7 +219,7 @@ function Home() {
                     </a>
                     <a href="www.twitter.com">
                       <img
-                        src="./img/chefs/twitter.png"
+                        src="/img/chefs/twitter.png"
                         height="30"
                         width="30"
                         alt="twitter"
@@ -443,7 +227,7 @@ function Home() {
                     </a>
                     <a href="tel:+917358905330">
                       <img
-                        src="./img/chefs/whatsapp.png"
+                        src="/img/chefs/whatsapp.png"
                         height="30"
                         width="30"
                         alt="whatsapp"
@@ -452,7 +236,7 @@ function Home() {
                   </div>
                   <img
                     className="img-fluid rounded border border-2 border-black"
-                    src="./img/chefs/chefs-2.jpg"
+                    src="/img/chefs/chefs-2.jpg"
                     alt="Chef"
                   />
                 </div>
@@ -471,7 +255,7 @@ function Home() {
                   <div className="chefs-social me-2 end-0 rounded p-2 d-grid gap-2 bg-dark bg-opacity-25 position-absolute">
                     <a href="www.instagram.com">
                       <img
-                        src="./img/chefs/instagram.png"
+                        src="/img/chefs/instagram.png"
                         height="30"
                         width="30"
                         alt="instagram"
@@ -479,7 +263,7 @@ function Home() {
                     </a>
                     <a href="www.facebook.com">
                       <img
-                        src="./img/chefs/facebook.png"
+                        src="/img/chefs/facebook.png"
                         height="30"
                         width="30"
                         alt="facebook"
@@ -487,7 +271,7 @@ function Home() {
                     </a>
                     <a href="www.twitter.com">
                       <img
-                        src="./img/chefs/twitter.png"
+                        src="/img/chefs/twitter.png"
                         height="30"
                         width="30"
                         alt="twitter"
@@ -495,7 +279,7 @@ function Home() {
                     </a>
                     <a href="tel:+917358905330">
                       <img
-                        src="./img/chefs/whatsapp.png"
+                        src="/img/chefs/whatsapp.png"
                         height="30"
                         width="30"
                         alt="whatsapp"
@@ -504,7 +288,7 @@ function Home() {
                   </div>
                   <img
                     className="img-fluid rounded border border-2 border-black"
-                    src="./img/chefs/chefs-3.jpg"
+                    src="/img/chefs/chefs-3.jpg"
                     alt="Chef"
                   />
                 </div>
@@ -523,7 +307,7 @@ function Home() {
                   <div className="chefs-social me-2 end-0 rounded p-2 d-grid gap-2 bg-dark bg-opacity-25 position-absolute">
                     <a href="www.instagram.com">
                       <img
-                        src="./img/chefs/instagram.png"
+                        src="/img/chefs/instagram.png"
                         height="30"
                         width="30"
                         alt="instagram"
@@ -531,7 +315,7 @@ function Home() {
                     </a>
                     <a href="www.facebook.com">
                       <img
-                        src="./img/chefs/facebook.png"
+                        src="/img/chefs/facebook.png"
                         height="30"
                         width="30"
                         alt="facebook"
@@ -539,7 +323,7 @@ function Home() {
                     </a>
                     <a href="http://www.twitter.com">
                       <img
-                        src="./img/chefs/twitter.png"
+                        src="/img/chefs/twitter.png"
                         height="30"
                         width="30"
                         alt="twitter"
@@ -547,7 +331,7 @@ function Home() {
                     </a>
                     <a href="tel:+917358905330">
                       <img
-                        src="./img/chefs/whatsapp.png"
+                        src="/img/chefs/whatsapp.png"
                         height="30"
                         width="30"
                         alt="whatsapp"
@@ -556,7 +340,7 @@ function Home() {
                   </div>
                   <img
                     className="img-fluid rounded border border-2 border-black"
-                    src="./img/chefs/chefs-2.jpg"
+                    src="/img/chefs/chefs-2.jpg"
                     alt="Chef"
                   />
                 </div>
@@ -591,7 +375,7 @@ function Home() {
               <div className="col-12 p-3 text-center">
                 <img
                   className="rounded-circle "
-                  src="./img/man1.jpg"
+                  src="/img/man1.jpg"
                   height="55"
                   width="55"
                   alt=""
@@ -610,7 +394,7 @@ function Home() {
               <div className="col-12 p-3 text-center">
                 <img
                   className="rounded-circle "
-                  src="./img/women1.jpg"
+                  src="/img/women1.jpg"
                   height="55"
                   width="55"
                   alt=""
@@ -629,7 +413,7 @@ function Home() {
               <div className="col-12 p-3 text-center">
                 <img
                   className="rounded-circle "
-                  src="./img/woman2.jpg"
+                  src="/img/woman2.jpg"
                   height="55"
                   width="55"
                   alt=""

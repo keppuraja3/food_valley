@@ -15,19 +15,21 @@ function Admin() {
   const SERVER_URL = import.meta.env.VITE_SERVER_URL;
   const location = useLocation();
   const navigate = useNavigate();
-  const { decodedToken, isExpired } = useJwt(localStorage.getItem("token"));
-  // useEffect(() => {
-  // console.log(decodedToken);
-  // if (decodedToken.role == "a") {
-  //   // navigate("/");
-  // } else {
-  //   navigate(`/`);
-  // }
-  // // }, []);
+
+  const token = localStorage.getItem("token");
+
+  const { decodedToken, isExpired } = useJwt(token);
+  const isToken = () => {
+    token == null && navigate("/");
+  };
+  useEffect(() => {
+    isToken();
+  }, []);
 
   const handleSideBarClose = () => {
     setSideBarShow(false);
   };
+
   const handleSideBarShow = () => setSideBarShow(true);
 
   return (

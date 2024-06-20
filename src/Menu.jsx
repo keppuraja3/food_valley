@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
+
 function Menu() {
   const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
@@ -110,7 +111,7 @@ function Menu() {
                   <></>
                 )}
 
-                <Link to="order">
+                <Link to={`/order/${food._id}`}>
                   <div className="card-header  ">
                     <img
                       className="card-img"
@@ -127,7 +128,7 @@ function Menu() {
                     {food.description}
                   </div>
                   <div className="d-flex justify-content-around  align-items-center row">
-                    <div className="badge col-3 text-light  text-center text-capitalize p-2 btn bg-gradient bg-danger   ">
+                    <div className="badge col-3 text-light d-flex justify-content-center align-items-center h-100 text-center text-capitalize p-2 btn bg-gradient bg-danger   ">
                       &#8377; {food.price}
                     </div>
                     <button
